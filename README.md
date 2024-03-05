@@ -18,7 +18,6 @@ team name:better call Li
 
 - ACM gold medal winner
 
-- also a super fan of Cristiano Ronaldo
 
 
 ## Tester: Zhouyuan Ma
