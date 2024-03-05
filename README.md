@@ -24,7 +24,7 @@ team name:better call Li
 ## Tester: Zhouyuan Ma
 - nickname: Joey
 
-- working in the field of multimode large model now
+- working in the field of RAG for LLMs now
 
 
 ## Another Programmer: Changsheng Huang
