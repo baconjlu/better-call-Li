@@ -28,7 +28,7 @@ team name:better call Li
 
 
 ## Another Programmer: Changsheng Huang
-- nickname:Fish
+- nickname:Fish(weird name huh,nerifish actually, but everybody in the english class call him fish,so let's just say fish)
 
 - also ACM gold medal winner
 
