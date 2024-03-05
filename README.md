@@ -18,6 +18,7 @@ team name:better call Li
 
 - ACM gold medal winner
 
+- also a super fan of Cristiano Ronaldo
 
 
 ## Tester: Zhouyuan Ma
@@ -42,8 +43,12 @@ briefly speaking, the project is about developing an app that can go buzzing or 
 ![wewantyou](pics/wewantyou.jpg)
 to fully take advantage of the fact that we got two gold medal programmer, we set two programmer roles in our group.
 and the PM, which means me, will probably take the task of Liaison and communicate directly to every member in our group.
-and we are recruiting for Requirement Analyst and System Architect, hopefully so. but everything is negotiable.
+and we are recruiting for two partners from UTAD as Requirement Analyst and System Architect, hopefully so. but everything is negotiable. 
+
 speaking of negotiable, gonna need an example here.such as if everyone wanna be Liaison, then I will take the remaining task.
+
+
+Together we gonna make a great team, look at the innocent and sincere eyes of this cat(yep,that's a cat)，and you know i ain't saying any bullshit and how can a man say no to a recrutement with a lovely cat image.  
 
 
 please feel free to contact with me through wechat:mike_zheng02
