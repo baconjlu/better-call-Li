@@ -1,8 +1,6 @@
 # WE want you!!!
 team name:better call Li
 
-
-
 ![bettercallLI](pics/cover.jpg)
 
 ## PM: Peisen Zheng
@@ -33,6 +31,13 @@ team name:better call Li
 - nickname:Fish
 
 - also ACM gold medal winner
+
+# About the project
+briefly speaking, the project is about developing an app that can go buzzing or vibrating or whatever as long as it can remind user that there are something worthy to pay a visit around. It can be a reputable restaurant or bar or some scenery spots etc. And our group members has already taken the programming task and testing task. the requirement analysis task and system design remain untaken.
+![stages](pics/stages.jpg)
+
+
+
 
 # Recruiting Part
 ![wewantyou](pics/wewantyou.jpg)
