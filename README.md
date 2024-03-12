@@ -1,4 +1,4 @@
-# WE want you!!!
+# Already done all the recruiting things
 team name:better call Li
 
 ![bettercallLI](pics/cover.jpg)
@@ -24,7 +24,7 @@ team name:better call Li
 ## Tester: Zhouyuan Ma
 - nickname: Joey
 
-- working in the field of RAG for LLMs now
+- working in the field of multimode large model now
 
 
 ## Another Programmer: Changsheng Huang
@@ -32,29 +32,17 @@ team name:better call Li
 
 - also ACM gold medal winner
 
-## System Architect: João Matias 
+## System Architect: João Matias
 - nickname: Matias
 
 - the portuguese one (insert Jose Mourinho reference)
 
 # About the project
-briefly speaking, the project is about developing an app that can go buzzing or vibrating or whatever as long as it can remind user that there are something worthy to pay a visit around. It can be a reputable restaurant or bar or some scenery spots etc. And our group members has already taken the programming task and testing task. the requirement analysis task and system design remain untaken.
+briefly speaking, the project is about developing an app that can go buzzing or vibrating or whatever as long as it can remind user that there are something worthy to pay a visit around. It can be a reputable restaurant or bar or some scenery spots etc. And our group members has already taken the programming task and testing task.
 ![stages](pics/stages.jpg)
 
+![milestones](pics/milestones.jpg)
 
-
-
-# Recruiting Part
-![wewantyou](pics/wewantyou.jpg)
-to fully take advantage of the fact that we got two gold medal programmer, we set two programmer roles in our group.
-and the PM, which means me, will probably take the task of Liaison and communicate directly to every member in our group.
-and we are recruiting for two partners from UTAD as Requirement Analyst and System Architect, hopefully so. but everything is negotiable. 
-
-speaking of negotiable, gonna need an example here.such as if everyone wanna be Liaison, then I will take the remaining task.
-
-
-Together we gonna make a great team, look at the innocent and sincere eyes of this cat(yep,that's a cat)，and you know i ain't saying any bullshit and how can a man say no to a recrutement with a lovely cat image.  
-
-
-please feel free to contact with me through wechat:mike_zheng02
-or you can just add my wechat in the DSD groupchat.
+## current work
+2024.3.9: completed building up the team. 
+2024.3.11: our requirements analyst has started working on his work. and the deadline will be this saturday which is 2024.3.16
