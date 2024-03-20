@@ -44,9 +44,11 @@
 
 **Description:** The algorithm module needs personalized recommendations based on user preferences. User information should include basic information (such as age, gender, occupation, education, etc.), historical shopping data (such as shopping store, time, products, quantity, etc.), and user preferences.
 
-<span style="background-color: yellow;"> Demo 1: Please provide me with all users who are students and have shopped at Walmart. </span>
+```
+Demo 1: Please provide me with all users who are students and have shopped at Walmart. 
 
-<span style="background-color: yellow;"> Demo 2: Please provide user 001's user information.</span> 
+Demo 2: Please provide user 001's user information.
+```
 
 
 
@@ -57,12 +59,13 @@
 **Description:** The algorithm module needs to recommend specific shops or products to users based on shop information. Shop information should include the shop's name, type, sales history (such as quantities of certain products sold), and detailed information about all products (such as product name, brief description, category, etc.). To make effective recommendations based on the user's geographical location, the algorithm module will provide the database with the user's location information (possibly latitude and longitude) and the search radius (x kilometers), and the database should return shop information that meets these criteria.
 
  
+```
+Demo 1: Please provide me with information about all antique shops. </span>
 
-<span style="background-color: yellow;">Demo 1: Please provide me with information about all antique shops. </span>
+Demo 2: Please provide shop 001's shop information.
 
-<span style="background-color: yellow;">Demo 2: Please provide shop 001's shop information. </span>
-
-<span style="background-color: yellow;">Demo 3: Please provide all shop information within a 10km radius of (30°N, 120°E). </span>
+Demo 3: Please provide all shop information within a 10km radius of (30°N, 120°E).
+```
 
  
 
