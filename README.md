@@ -1,11 +1,76 @@
-# Notice
+# DSD Team: Better Call Li!
+
+## 📒Directory
+
+- We update all our milestones and progress on [README.md](./README.md) 
+- We store all userfull materials in [matierials](./matierials) 
 
 
 
-This branch is Li's workspace and he will put some of his stuff here. 
+
+
+## 🚩Progress
+
+We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
 
 
 
-### Requirement Analysis
+#### Requirement Analysis
 
-[Our requirement analysis](./ReqAnalysis/req_doc.md)
+- 2024.3.15: Finished our final version of requirement analysis
+
+- [Our requirement analysis](./req-analysis/req_doc.md) 
+
+
+
+## 💡 Team Roles
+
+|        |      PM      |   Liasion    |     R-A      |     S-A      |  Programmer  |    Tester    |
+| :----: | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: |
+|  Mike  | $\checkmark$ | $\checkmark$ |              |              |              |              |
+|   Li   |              |              |              |              | $\checkmark$ |              |
+|  Joey  |              |              |              |              |              | $\checkmark$ |
+|  Fish  |              |              |              |              | $\checkmark$ |              |
+| Matias |              |              |              | $\checkmark$ |              |              |
+| David  |              |              | $\checkmark$ |              |              |              |
+
+
+
+
+
+
+
+## 🌐Team Members
+
+#### PM: Peisen Zheng
+- nickname: Mike
+
+- working in the field of AIGC
+
+#### Programmer: Guanghe Li 
+
+- nickname: Li
+- Adv: Coding, AI(Reinforcement Learning), English
+- ACM gold medal winner
+
+
+#### Tester: Zhouyuan Ma
+- nickname: Joey
+
+- working in the field of multimode large model now
+
+
+#### Another Programmer: Changsheng Huang
+- nickname:Fish(weird name huh,nerifish actually, but everybody in the english class call him fish,so let's just say fish)
+
+- also ACM gold medal winner
+
+#### System Architect: João Matias
+- nickname: Matias
+
+- the portuguese one (insert Jose Mourinho reference)
+
+#### Requirement analyst: David Ramos Dias
+- nickname: David
+
+- responsible for RA part

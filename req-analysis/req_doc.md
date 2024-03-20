@@ -58,7 +58,7 @@ Demo 2: Please provide user 001's user information.
 
 **Description:** The algorithm module needs to recommend specific shops or products to users based on shop information. Shop information should include the shop's name, type, sales history (such as quantities of certain products sold), and detailed information about all products (such as product name, brief description, category, etc.). To make effective recommendations based on the user's geographical location, the algorithm module will provide the database with the user's location information (possibly latitude and longitude) and the search radius (x kilometers), and the database should return shop information that meets these criteria.
 
- 
+
 ```
 Demo 1: Please provide me with information about all antique shops. </span>
 
