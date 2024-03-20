@@ -3,7 +3,7 @@
 ## 📒Directory
 
 - We update all our milestones and progress on [README.md](./README.md) 
-- We store all userfull materials in [matierials](./matierials) 
+- We store all userfull materials in [materials](./materials) 
 
 
 
