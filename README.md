@@ -11,8 +11,9 @@
 
 ## 🚩Progress
 
-We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
-3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
+- We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
+
+- 3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
 
 
 #### System Architecture
