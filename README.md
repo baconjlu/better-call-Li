@@ -12,7 +12,12 @@
 ## 🚩Progress
 
 We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
+3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
 
+
+#### System Architecture
+ - 2024.3.26: our system architect finished first version of component diagram which has been shown below. the work will be updated in the future.
+ - ![componentDiagram](pics/componentdia.png)
 
 
 #### Requirement Analysis
