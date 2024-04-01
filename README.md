@@ -15,10 +15,13 @@
 
 - 3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
 
+- 3.31 finished the task of system architecture. 
 
 #### System Architecture
  - 2024.3.26: our system architect finished first version of component diagram which has been shown below. the work will be updated in the future.
  - ![componentDiagram](pics/componentdia.png)
+
+ - 2024.3.31：made some changes to our component diagram, and finished out class diagram. all the docmuments are available in the folder SA.
 
 
 #### Requirement Analysis
