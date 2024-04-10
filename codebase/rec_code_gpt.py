@@ -8,6 +8,7 @@ class GPT_RECOMMENDER:
 
 	def __init__(self, 
 		storage_path = 'datas/storage/user',
+		openai_key = None 
 	): 
 		
 		# 用户存储
@@ -18,6 +19,7 @@ class GPT_RECOMMENDER:
 		with open(self.prompt_path, 'r') as f: 
 			self.prompt = f.read() 
 		
+		self.openai_key = openai_key 
 		
 		print(f'###current prompt###\n\n{self.prompt}\n\n') 
 		
@@ -45,8 +47,10 @@ class GPT_RECOMMENDER:
 	def create_gpt_prompt(self, history_data, item_list): 
 		cur_prompt = self.prompt 
 		cur_prompt += '\n' + 'Question: User shopping history: [' + ", ".join(history_data) + "], item list: [" + ", ".join(item_list) + ']'
-		print(cur_prompt) 
+		return cur_prompt 
 
+	def ask_gpt(self, prompt):
+		return prompt 
 	# recommend K items from item_list 
 	def recommend_item(self, user_infos, item_list, K = 10): 
 		K = min(K, len(item_list)) 
@@ -58,9 +62,10 @@ class GPT_RECOMMENDER:
 			for _ in history_data: 
 				full_data += _['shop_list']
 
-			self.create_gpt_prompt(full_data, item_list) 
+			current_prompt = self.create_gpt_prompt(full_data, item_list)
+			gpt_recommendation = self.ask_gpt(current_prompt) 
 
-		
+
 		else:  
 			# NO history, direct recommend 
 			random_selection = random.sample(item_list, K)  
