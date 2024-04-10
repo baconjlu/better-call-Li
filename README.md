@@ -22,6 +22,7 @@
  - here is a gantt chart for our group. red stripes represent our current process and the blue stripes represent the ordered process .
  gantt
 1/2
+```mermaid
 dateFormat MM-DD
 axisFormat %m-%d
 title Our Process
@@ -37,7 +38,7 @@ Scheduled System design :active,03-23, 14d
 section coding(first version)
 Our coding: crit, 04-08,7d
 Scheduled coding: active,04-08,7d
-
+```
 
 #### System Architecture
  - 2024.3.26: our system architect finished first version of component diagram which has been shown below. the work will be updated in the future.
