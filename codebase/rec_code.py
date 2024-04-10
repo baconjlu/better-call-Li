@@ -2,9 +2,8 @@ import numpy as np
 import pandas as pd  
 import os  
 import random 
-import json 
-import gensim.downloader as api
-from gensim.models import Word2Vec 
+import json    
+from utils.BERT import Bert 
 
 class USER_RECOMMENDATION_SYSTEM:
 
@@ -16,15 +15,14 @@ class USER_RECOMMENDATION_SYSTEM:
 		self.STORAGE_PATH = storage_path 
 		os.makedirs(self.STORAGE_PATH, exist_ok = True) 
 
+
 		# NLP 存储 
-		self.NLP_SIM_PATH = 'datas/storage/NLP/similarity/word2vec_google_news_model.bin' 
-		if os.path.exists(self.NLP_SIM_PATH): 
-			self.w2v_model = Word2Vec(self.NLP_SIM_PATH) 
-		else: 
-			os.makedirs(os.path.dirname(self.NLP_SIM_PATH), exist_ok = True)  
-			self.w2v_model = api.load('word2vec-google-news-300')   
-			self.w2v_model
+		self.BERT_PATH = 'utils/weights/bert-base-uncased' 
+		self.bert_model = Bert(self.BERT_PATH) 
 		
+	def query_word_similarity(self, word1, word2): 
+		calc_sim = self.bert_model.getTextSim(word1, word2, 0) 
+		return calc_sim[1] 
 
 	
 	def get_user_history_path(self, user_id): 
@@ -67,7 +65,6 @@ class USER_RECOMMENDATION_SYSTEM:
 
 
 if __name__ == '__main__':  
-	w2v_model = api.load('word2vec-google  -news-300')
 
 	rec_sys = USER_RECOMMENDATION_SYSTEM() 
 	rec_sys.update_user_info(
