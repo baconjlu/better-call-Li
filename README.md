@@ -23,21 +23,29 @@
  gantt
 1/2
 ```mermaid
-dateFormat MM-DD
-axisFormat %m-%d
-title Our Process
-section Preparation
-our Team Building :crit, a1,03-04, 4d
-Scheduled Team Building: active,a3,03-04, 5d
-Our Role selection : crit, a2,03-08, 4d Scheduled Role Selection: active , a4, 03-09, 7d section RA
-Our Requirements Analysis :crit, 03-12 , 8d
-Scheduled Requirements Analysis:active, 03-16 , 7d
-section System Design
-Our System design(doing):crit,03-20, 17d
-Scheduled System design :active,03-23, 14d
-section coding(first version)
-Our coding: crit, 04-08,7d
-Scheduled coding: active,04-08,7d
+gantt
+    dateFormat MM-DD
+    axisFormat %m-%d
+    title Our Process
+
+    section Preparation
+    Our Team Building :crit, a1, 03-04, 4d
+    Scheduled Team Building : active, a3, 03-04, 5d
+    Our Role Selection : crit, a2, 03-08, 4d
+    Scheduled Role Selection : active, a4, 03-09, 7d
+
+    section RA (Requirements Analysis)
+    Our Requirements Analysis : crit, 03-12, 8d
+    Scheduled Requirements Analysis : active, 03-16, 7d
+
+    section System Design
+    Our System Design (Doing) : crit, 03-20, 17d
+    Scheduled System Design : active, 03-23, 14d
+
+    section "Coding (First Version)"
+    Our Coding : crit, 04-08, 7d
+    Scheduled Coding : active, 04-08, 7d
+
 ```
 
 #### System Architecture
