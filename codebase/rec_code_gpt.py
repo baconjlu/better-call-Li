@@ -1,3 +1,4 @@
+import re 
 import numpy as np 
 import pandas as pd  
 import os  
@@ -49,8 +50,16 @@ class GPT_RECOMMENDER:
 		cur_prompt += '\n' + 'Question: User shopping history: [' + ", ".join(history_data) + "], item list: [" + ", ".join(item_list) + ']'
 		return cur_prompt 
 
+
 	def ask_gpt(self, prompt):
+
+		# parse gpt answer 
+		answer = None  # answer 由 GPT 给
+		pattern = r'\[(.*?)\]'
+		data_list = re.findall(r'\[([^\[\]]*)\]', prompt)
+		extracted_data = [item.strip() for item in data_list[0].split(',')]
 		return prompt 
+
 	# recommend K items from item_list 
 	def recommend_item(self, user_infos, item_list, K = 10): 
 		K = min(K, len(item_list)) 
@@ -75,8 +84,18 @@ class GPT_RECOMMENDER:
 
 
 if __name__ == '__main__':  
-
-	rec_sys = GPT_RECOMMENDER() 
+	with open('test_pars.txt', 'r') as f:
+		prompt = f.read() 
+	pattern = r'\[(.*?)\]'
+	data_list = re.findall(r'\[([^\[\]]*)\]', prompt)
+	extracted_data = [item.strip() for item in data_list[0].split(',')]
+	print(extracted_data)
+	for _ in extracted_data:
+		print(_) 
+	# print([data for data in extracted_data])
+	# extracted_data = [data.replace("'", "") for data in extracted_data]
+	# print(extracted_data)
+	# rec_sys = GPT_RECOMMENDER() 
 	# rec_sys.update_user_info(
 	# 	{"user_id": "00121"}, 
 	# 	["apple", "juice", "sossage"]
@@ -86,5 +105,5 @@ if __name__ == '__main__':
 	# 	["lettace", "grape", "pear"] 
 	# )  
  
-	rec_sys.recommend_item({"user_id": "00121"}, ['bannana', 'pen', 'paper', 'soda'], K = 2) 
+	# rec_sys.recommend_item({"user_id": "00121"}, ['bannana', 'pen', 'paper', 'soda'], K = 2) 
 
