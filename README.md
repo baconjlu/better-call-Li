@@ -17,6 +17,10 @@
 
 - 3.31 finished the task of system architecture. 
 
+- 4.8 started coding the first iteration coding. and already made some progress.
+
+- 4.9 make some change to our interface to adjust the need of other group.
+
 
 #### Gantt Chart
  - here is a gantt chart for our group. red stripes represent our current process and the blue stripes represent the ordered process .
