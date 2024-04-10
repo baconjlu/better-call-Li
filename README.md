@@ -17,6 +17,28 @@
 
 - 3.31 finished the task of system architecture. 
 
+
+#### Gantt Chart
+ - here is a gantt chart for our group. red stripes represent our current process and the blue stripes represent the ordered process .
+ gantt
+1/2
+dateFormat MM-DD
+axisFormat %m-%d
+title Our Process
+section Preparation
+our Team Building :crit, a1,03-04, 4d
+Scheduled Team Building: active,a3,03-04, 5d
+Our Role selection : crit, a2,03-08, 4d Scheduled Role Selection: active , a4, 03-09, 7d section RA
+Our Requirements Analysis :crit, 03-12 , 8d
+Scheduled Requirements Analysis:active, 03-16 , 7d
+section System Design
+Our System design(doing):crit,03-20, 17d
+Scheduled System design :active,03-23, 14d
+section coding(first version)
+Our coding: crit, 04-08,7d
+Scheduled coding: active,04-08,7d
+
+
 #### System Architecture
  - 2024.3.26: our system architect finished first version of component diagram which has been shown below. the work will be updated in the future.
  - ![componentDiagram](pics/componentdia.png)
