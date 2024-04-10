@@ -43,7 +43,17 @@ class USER_RECOMMENDATION_SYSTEM:
 		else:
 			with open(user_shoplist_info, 'w') as f:  
 				json.dump([{"shop_list": shop_list}], f) 
-		
+	
+	def select_top_K(self, user_history, item_list, K): 
+		score_list = [] 
+		for _item in item_list: 
+			MAXIMUM_SIM = -1
+			for j in user_history: 
+				MAXIMUM_SIM = max(MAXIMUM_SIM, self.query_word_similarity(_item, j)) 
+			score_list.append((_item, MAXIMUM_SIM))
+		score_list = sorted(score_list, key = lambda x : -x[1])
+		return score_list[:K]  
+
 	# recommend K items from item_list 
 	def recommend_item(self, user_infos, item_list, K = 10): 
 		K = min(K, len(item_list)) 
@@ -53,9 +63,10 @@ class USER_RECOMMENDATION_SYSTEM:
 				history_data = json.load(f) 
 			full_data = []
 			for _ in history_data: 
-				full_data.append(_)      
-			
-			
+				full_data += _['shop_list']
+			top_k_items = self.select_top_K(full_data, item_list, K) 
+			return [ _[0] for _ in top_k_items]
+		
 		else:  
 			# NO history, direct recommend 
 			random_selection = random.sample(item_list, K)  
@@ -67,7 +78,14 @@ class USER_RECOMMENDATION_SYSTEM:
 if __name__ == '__main__':  
 
 	rec_sys = USER_RECOMMENDATION_SYSTEM() 
-	rec_sys.update_user_info(
-		{"user_id": "00121"}, 
-		["apple", "juice", "sossage"]
-	) 
+	# rec_sys.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["apple", "juice", "sossage"]
+	# ) 
+	# rec_sys.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["lettace", "grape", "pear"] 
+	# )  
+ 
+	rec_sys.recommend_item({"user_id": "00121"}, ['bannana', 'pen', 'paper', 'soda'], K = 2) 
+
