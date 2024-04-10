@@ -13,13 +13,16 @@
 
 - We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
 
-- 3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
+- 4.10 Release First draft of code at [codebase](./codebase/): Recommend with embedding similarity and GPT Assistance 
 
-- 3.31 finished the task of system architecture. 
+- 4.9 make some change to our interface to adjust the need of other group.
 
 - 4.8 started coding the first iteration coding. and already made some progress.
 
-- 4.9 make some change to our interface to adjust the need of other group.
+- 3.31 finished the task of system architecture. 
+
+- 3.26 a meeting was arranged for all the group leaders and we were offered a template for SA. Our system architect has begun working on that.
+
 
 
 #### Gantt Chart
