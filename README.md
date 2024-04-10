@@ -24,8 +24,6 @@
 
 #### Gantt Chart
  - here is a gantt chart for our group. red stripes represent our current process and the blue stripes represent the ordered process .
- gantt
-1/2
 ```mermaid
 gantt
     dateFormat MM-DD
