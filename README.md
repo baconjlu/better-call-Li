@@ -13,6 +13,8 @@
 
 - We keep track of every small milestone we achieve. This branch should be updated with a minimum frequency of once in two days. 
 
+- 4.13 update of [codebase](./codebase/), now it can recommend items, recommend stores, improve via user feedback 
+
 - 4.10 Release First draft of code at [codebase](./codebase/): Recommend with embedding similarity and GPT Assistance 
 
 - 4.9 make some change to our interface to adjust the need of other group.

@@ -94,6 +94,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 
 
 
+# 用户反馈   
 if __name__ == '__main__':  
 
 	# rec_sys = USER_RECOMMENDATION_SYSTEM() 
