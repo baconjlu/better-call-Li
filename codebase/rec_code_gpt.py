@@ -119,6 +119,7 @@ class GPT_RECOMMENDER:
 		
 
 
+
 if __name__ == '__main__':  
 	rec_sys = GPT_RECOMMENDER(key_path = './utils/keys/MyKeys.txt', api_base = "https://api.nbfaka.com/v1") 
 
