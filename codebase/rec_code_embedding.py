@@ -5,6 +5,7 @@ import random
 import json    
 from tqdm import tqdm 
 from utils.BERT import Bert 
+from collections import defaultdict  
 
 class USER_RECOMMENDATION_SYSTEM:
 
@@ -71,7 +72,7 @@ class USER_RECOMMENDATION_SYSTEM:
 		else:  
 			# NO history, direct recommend 
 			random_selection = random.sample(item_list, K) 
-			return random_selection, [0 for _ in range(K)] 
+			return random_selection, [1 for _ in range(K)] 
 			
 class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM): 
 	def __init__( self, storage_path = 'datas/storage/user'): 
@@ -82,17 +83,67 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	# 推荐商户
 	def recommend_store(self, user_info, store_list, K = 10): 
 		# store_list 是一个 list，然后 list 中的每个元素是一个 dict 
+
+		# 此时应该考虑 user-feedback   
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_info['user_id'])  
+		user_comment_path = os.path.join(user_storage_path, 'comment.json') 
+		history_score = defaultdict(list) 
+		print(user_comment_path) 
+		if os.path.exists(user_comment_path): 
+			with open(user_comment_path, 'r') as f: 
+				user_comment = json.load(f)    
+			print(user_comment) 
+			for com in user_comment: 
+				for stor in com['store_info']: 
+					history_score[stor['store_name']].append(com['score']) 
+			for _ in history_score: 
+				history_score[_] = np.mean(history_score[_]) 
 		lis_store = [] 
 		for store in tqdm(store_list): 
 			store_item = store['store_item'] 
 			store_name = store['store_name'] 
 			sim_values = []     
 			rec_items, rec_scores = self.recommend_item(user_info, store_item, K = len(store_item))    
+			store_score = np.mean(rec_scores)
+			if store_name in history_score: 
+				store_score *= (history_score[store_name] + 0.5)   
 			lis_store.append([store, np.mean(rec_scores)])
-		lis_store = sorted(lis_store, key = lambda x : -x[1])
+		lis_store = sorted(lis_store, key = lambda x : -x[1])      
 		return lis_store 
 
+	# 传入用户数据，商铺数据，以及一个打分
+	def update_store_feedback(self, user_infos, store_infos, rec_score): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])  
+		os.makedirs(user_storage_path, exist_ok = True) 
+		user_comment_path = os.path.join(user_storage_path, 'comment.json') 
+		if os.path.exists(user_comment_path): 
+			with open(user_comment_path, 'r') as f: 
+				origin_data = json.load(f) 
+			new_data = origin_data.append({"user_info": user_infos, "store_info": store_infos, "score": rec_score})
+			with open(user_comment_path, 'w') as f: 
+				json.dump(new_data, f) 
+		else: 
+			with open(user_comment_path, 'w') as f: 
+				json.dump([{"user_info": user_infos, "store_info": store_infos, "score": rec_score}], f)
+		
+			 
+"""
+	def update_user_info(self, user_infos, shop_list): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])  
+		user_shoplist_info = os.path.join(user_storage_path, 'shoplist_info.json')   
+		os.makedirs(user_storage_path, exist_ok = True) 
+		if os.path.exists(user_shoplist_info): 
+			with open(user_shoplist_info, 'r') as f: 
+				data = json.load(f)  
+			data.append({"shop_list": shop_list}) 
+			with open(user_shoplist_info, 'w') as f: 
+				json.dump(data, f) 
+		else:
+			with open(user_shoplist_info, 'w') as f:  
+				json.dump([{"shop_list": shop_list}], f) 
+"""
 
+# 可以这么做, 如果一个用户对之前推荐的结果不满意，就将这些商店的权重降低 
 
 # 用户反馈   
 if __name__ == '__main__':  
@@ -117,16 +168,22 @@ if __name__ == '__main__':
 			"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
 		}
 	]
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["apple", "juice", "sossage"]
-	) 
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["lettace", "grape", "pear"] 
-	)  
+	# rec_store.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["apple", "juice", "sossage"]
+	# ) 
+	# rec_store.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["lettace", "grape", "pear"] 
+	# )  
 
-	x = rec_store.recommend_store({"user_id": "00121"}, store_list)   
-	print(x) 
+	# rec_store.update_store_feedback({"user_id": "00121"}, store_list, 0.5) 
+	# rec_store.update_store_feedback({"user_id": "00122"}, store_list, 0.8) 
+	print(rec_store.recommend_store({"user_id": "00121"}, store_list))
+	# x = rec_store.recommend_store({"user_id": "00121"}, store_list)   
+	# print(x) 
 	# print(rec_store.recommend_item({"user_id": "00121"}, ['bannana', 'pen', 'paper', 'soda'], K = 2))
 
+
+
+# python rec_code_embedding.py 
