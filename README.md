@@ -15,6 +15,12 @@
 
 - 4.13 update of [codebase](./codebase/), now it can recommend items, recommend stores, improve via user feedback 
 
+    - recommend items and stores via BERT-based embedding calculation
+
+    - able to save history data locally (.json format) 
+
+    - able to improve via user feedback s
+
 - 4.10 Release First draft of code at [codebase](./codebase/): Recommend with embedding similarity and GPT Assistance 
 
 - 4.9 make some change to our interface to adjust the need of other group.
