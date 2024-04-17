@@ -95,7 +95,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				user_comment = json.load(f)    
 			for com in user_comment: 
 				for stor in com['store_info']: 
-					print(stor['store_name'] )
+					# print(stor['store_name'] )
 					history_score[stor['store_name']].append(com['score']) 
 			for _ in history_score: 
 				history_score[_] = np.mean(history_score[_]) 
@@ -199,8 +199,8 @@ if __name__ == '__main__':
 	)
 	rec_items = rec_store.recommend_item(
 		{"user_id": "00121"}, 
-		["apple", "grape", "orange", "peach"], 
-		K = 3 
+		["apple", "watermelon", "orange", "peach", "car"], 
+		K = 5 
 	)
 	print(rec_items )
 	recommended_stores = rec_store.recommend_store({"user_id": "00121"}, store_list)
