@@ -11,6 +11,7 @@ class USER_RECOMMENDATION_SYSTEM:
 
 	def __init__(self, 
 		storage_path = 'datas/storage/user',
+		device = 'cuda:0'
 	): 
 		
 		# 用户存储
@@ -20,7 +21,7 @@ class USER_RECOMMENDATION_SYSTEM:
 
 		# NLP 存储 
 		self.BERT_PATH = 'utils/weights/bert-base-uncased' 
-		self.bert_model = Bert(self.BERT_PATH) 
+		self.bert_model = Bert(self.BERT_PATH, device) 
 		
 	def query_word_similarity(self, word1, word2): 
 		calc_sim = self.bert_model.getTextSim(word1, word2, 0) 
@@ -48,7 +49,7 @@ class USER_RECOMMENDATION_SYSTEM:
 	
 	def select_top_K(self, user_history, item_list, K): 
 		score_list = [] 
-		for _item in item_list: 
+		for _item in tqdm(item_list): 
 			MAXIMUM_SIM = -1
 			for j in user_history: 
 				MAXIMUM_SIM = max(MAXIMUM_SIM, self.query_word_similarity(_item, j)) 
@@ -75,10 +76,10 @@ class USER_RECOMMENDATION_SYSTEM:
 			return random_selection, [1 for _ in range(K)] 
 			
 class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM): 
-	def __init__( self, storage_path = 'datas/storage/user'): 
+	def __init__( self, storage_path = 'datas/storage/user', device = 'cuda:0'): 
 		
 		# 父类调用构造函数
-		super().__init__(storage_path = storage_path)  
+		super().__init__(storage_path = storage_path, device = device)  
 		
 	# 推荐商户
 
@@ -134,8 +135,26 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			# with open(user_comment_path, 'r') as f: 
 				# origin_data = json.load(f) 
 			# print(f'2: {origin_data}')
-		
-			 
+	
+	def update_user_preference(self, user_infos, user_preference):
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		if not os.path.exists(user_storage_path):
+			os.makedirs(user_storage_path)  
+		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')     
+		if os.path.exists(user_comment_path): 
+			with open(user_comment_path, 'r') as f: 
+				origin_data = json.load(f) 
+			# print(f'1-0: {origin_data}')
+			new_data = origin_data + user_preference
+			# print(f'1-1: {new_data}')	
+			with open(user_comment_path, 'w') as f: 
+				json.dump(new_data, f) 
+			# print(f'1-1: {new_data}')
+		else: 
+			with open(user_comment_path, 'w') as f: 
+				json.dump(user_preference, f)
+
+
 # 可以这么做, 如果一个用户对之前推荐的结果不满意，就将这些商店的权重降低 
 
 # 用户反馈   
@@ -143,69 +162,77 @@ if __name__ == '__main__':
 
 	# rec_sys = USER_RECOMMENDATION_SYSTEM() 
 	rec_store = STORE_RECOMMENDATION_SYSTEM()  
-	store_list = [
-		{
-			"store_name": "store-1", 
-			"store_item": ['apple', 'grape', 'juice', 'milk'] 
-		}, 
-		{
-			"store_name": "store-2", 
-			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-		},
-		{
-			"store_name": "store-3", 
-			"store_item": ['cherry', 'peach', 'pencil', 'bear'] 
-		},
-		{
-			"store_name": "store-4", 
-			"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
-		}
-	]
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["apple", "juice", "sossage"]
-	) 
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["lettace", "grape", "pear"] 
+	# store_list = [
+	# 	{
+	# 		"store_name": "store-1", 
+	# 		"store_item": ['apple', 'grape', 'juice', 'milk'] 
+	# 	}, 
+	# 	{
+	# 		"store_name": "store-2", 
+	# 		"store_item": ['bannana', 'grape', 'bottle', 'water'] 
+	# 	},
+	# 	{
+	# 		"store_name": "store-3", 
+	# 		"store_item": ['cherry', 'peach', 'pencil', 'bear'] 
+	# 	},
+	# 	{
+	# 		"store_name": "store-4", 
+	# 		"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
+	# 	}
+	# ]
+	rec_store.update_user_preference(
+		{"user_id", "00121"}, 
+		[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
+	)
+	rec_store.update_user_preference(
+		{"user_id", "00121"}, 
+		[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
 	)  
-	rec_store.update_store_feedback(
-		{"user_id": "00121"}, 
-		[
-			{
-				"store_name": "store-1", 
-				"store_item": ['apple', 'grape', 'juice', 'milk'] 
-			}, 
-			{
-				"store_name": "store-2", 
-				"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-			},
-		], 
-		0.8
-	)
-	rec_store.update_store_feedback(
-		{"user_id": "00121"}, 
-		[
-			{
-				"store_name": "store-1", 
-				"store_item": ['apple', 'grape', 'juice', 'milk'] 
-			}, 
-			{
-				"store_name": "store-2", 
-				"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-			},
-		], 
-		0.8
-	)
-	rec_items = rec_store.recommend_item(
-		{"user_id": "00121"}, 
-		["apple", "watermelon", "orange", "peach", "car"], 
-		K = 5 
-	)
-	print(rec_items )
-	recommended_stores = rec_store.recommend_store({"user_id": "00121"}, store_list)
-	for _ in recommended_stores: 
-		print(_) 
+	# rec_store.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["apple", "juice", "sossage"]
+	# ) 
+	# rec_store.update_user_info(
+	# 	{"user_id": "00121"}, 
+	# 	["lettace", "grape", "pear"] 
+	# )  
+	# rec_store.update_store_feedback(
+	# 	{"user_id": "00121"}, 
+	# 	[
+	# 		{
+	# 			"store_name": "store-1", 
+	# 			"store_item": ['apple', 'grape', 'juice', 'milk'] 
+	# 		}, 
+	# 		{
+	# 			"store_name": "store-2", 
+	# 			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
+	# 		},
+	# 	], 
+	# 	0.8
+	# )
+	# rec_store.update_store_feedback(
+	# 	{"user_id": "00121"}, 
+	# 	[
+	# 		{
+	# 			"store_name": "store-1", 
+	# 			"store_item": ['apple', 'grape', 'juice', 'milk'] 
+	# 		}, 
+	# 		{
+	# 			"store_name": "store-2", 
+	# 			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
+	# 		},
+	# 	], 
+	# 	0.8
+	# )
+	# rec_items = rec_store.recommend_item(
+	# 	{"user_id": "00121"}, 
+	# 	["apple", "watermelon", "orange", "peach", "car"], 
+	# 	K = 5 
+	# )
+	# print(rec_items )
+	# recommended_stores = rec_store.recommend_store({"user_id": "00121"}, store_list)
+	# for _ in recommended_stores: 
+	# 	print(_) 
 	# print(rec_store.recommend_store({"user_id": "00121"}, store_list))
 	
 
