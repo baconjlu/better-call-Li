@@ -147,9 +147,6 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		else: 
 			with open(user_comment_path, 'w') as f: 
 				json.dump([{"user_info": user_infos, "store_info": store_infos, "score": rec_score}], f)
-			# with open(user_comment_path, 'r') as f: 
-				# origin_data = json.load(f) 
-			# print(f'2: {origin_data}')
 	
 	def update_user_preference(self, user_infos, user_preference):  
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
