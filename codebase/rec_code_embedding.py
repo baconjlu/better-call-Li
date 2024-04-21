@@ -6,23 +6,29 @@ import json
 from tqdm import tqdm 
 from utils.BERT import Bert 
 from collections import defaultdict  
-
+from sklearn.tree import DecisionTreeClassifier
+import pickle 
 class USER_RECOMMENDATION_SYSTEM:
 
 	def __init__(self, 
 		storage_path = 'datas/storage/user',
-		device = 'cuda:0'
+		device = 'cuda:0', 
+		embedding_storage_path = 'data/storage/embedding'
 	): 
 		
 		# 用户存储
 		self.STORAGE_PATH = storage_path 
+		self.embedding_storage_path = embedding_storage_path 
 		os.makedirs(self.STORAGE_PATH, exist_ok = True) 
 
 
 		# NLP 存储 
 		self.BERT_PATH = 'utils/weights/bert-base-uncased' 
 		self.bert_model = Bert(self.BERT_PATH, device) 
-		
+	
+	def get_word_embedding(self, q_word): 
+		return self.bert_model.getEmb(q_word).detach().cpu().numpy()
+	
 	def query_word_similarity(self, word1, word2): 
 		calc_sim = self.bert_model.getTextSim(word1, word2, 0) 
 		return calc_sim[1] 
@@ -76,10 +82,19 @@ class USER_RECOMMENDATION_SYSTEM:
 			return random_selection, [1 for _ in range(K)] 
 			
 class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM): 
-	def __init__( self, storage_path = 'datas/storage/user', device = 'cuda:0'): 
+	def __init__(self, 
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree' 
+	): 
 		
 		# 父类调用构造函数
-		super().__init__(storage_path = storage_path, device = device)  
+		super().__init__(
+			storage_path = storage_path, 
+			device = device, 
+			embedding_storage_path = embdding_storage_path
+		)  
 		
 	# 推荐商户
 
@@ -136,7 +151,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				# origin_data = json.load(f) 
 			# print(f'2: {origin_data}')
 	
-	def update_user_preference(self, user_infos, user_preference):
+	def update_user_preference(self, user_infos, user_preference):  
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
 			os.makedirs(user_storage_path)  
@@ -152,16 +167,54 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			# print(f'1-1: {new_data}')
 		else: 
 			with open(user_comment_path, 'w') as f: 
-				json.dump(user_preference, f)
+				json.dump(user_preference, f)  
+		self.flush_user_preference(user_infos)
+	
+	def classify_user_preference(self, user_infos, _item): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])   
+		user_classifier_path = os.path.join(user_storage_path, 'classifier.pkl')    
+		if os.path.exists(user_classifier_path): 
+			with open(user_classifier_path, 'rb') as f: 
+				dec = pickle.load(f) 
+			return dec.predict(self.get_word_embedding(_item))
+		else: 
+			return None 
 
+	def flush_user_preference(self, user_infos): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])   
+		user_classifier_path = os.path.join(user_storage_path, 'classifier.pkl')    
+		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')        
+		with open(user_comment_path, 'r') as f: 
+			data = json.load(f) 
+		# 用决策树进行拟合的时候，一行一个样本
+		X_matrix = [] 
+		Y_matrix = [] 
+		for _ in tqdm(data): 
+			X_matrix.append(np.squeeze(self.get_word_embedding(_[0]), axis = 0))    
+			Y_matrix.append(_[1])
+		X_matrix = np.array(X_matrix) 
+		Y_matrix = np.array(Y_matrix)
+		dec = DecisionTreeClassifier()
+		dec.fit(X_matrix, Y_matrix)  
+		print(X_matrix.shape) 
+		print(Y_matrix.shape) 
+		with open(user_classifier_path, 'wb') as f: 
+			pickle.dump(dec, f) 
 
 # 可以这么做, 如果一个用户对之前推荐的结果不满意，就将这些商店的权重降低 
 
 # 用户反馈   
+
+# python rec_code_embedding.py 
 if __name__ == '__main__':  
 
 	# rec_sys = USER_RECOMMENDATION_SYSTEM() 
-	rec_store = STORE_RECOMMENDATION_SYSTEM()  
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	)  
 	# store_list = [
 	# 	{
 	# 		"store_name": "store-1", 
@@ -180,14 +233,16 @@ if __name__ == '__main__':
 	# 		"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
 	# 	}
 	# ]
-	rec_store.update_user_preference(
-		{"user_id", "00121"}, 
-		[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
-	)
-	rec_store.update_user_preference(
-		{"user_id", "00121"}, 
-		[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
-	)  
+	# rec_store.update_user_preference(
+	# 	{"user_id": "00121"}, 
+	# 	[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
+	# )
+	# rec_store.update_user_preference(
+	# 	{"user_id": "00121"}, 
+	# 	[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
+	# )  
+	# rec_store.flush_user_preference({"user_id": "00121"})
+	print(rec_store.classify_user_preference({"user_id": "00121"}, "juice"))
 	# rec_store.update_user_info(
 	# 	{"user_id": "00121"}, 
 	# 	["apple", "juice", "sossage"]

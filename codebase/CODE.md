@@ -1,5 +1,19 @@
 ## CodeBase of Recommendation System 
 
+
+
+### TODO 
+
+- BERT Inference is relatively slow, we can pre-process 30k popular english words in advance. 
+
+- Use GPU to infer 
+
+- Choose Random Forest to classify preference 
+
+
+
+
+###
 Usage:
 ```python
 if __name__ == '__main__':  

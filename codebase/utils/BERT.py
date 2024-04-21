@@ -10,6 +10,7 @@ class Bert():
     
     def getEmb(self, text):
         encoding = self.tokenizer(text, return_tensors='pt', max_length=512, truncation=True)
+        encoding.to(self.device) 
         with torch.no_grad():
             output = self.model(**encoding)
         embedding = output.last_hidden_state.mean(dim=1)
