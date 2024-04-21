@@ -7,8 +7,10 @@
 
 
 ## 🌟Recommendation System Overview 
+- Interface handbook is at [handbook](./materials/interface%20specification%20v.5.1.md)    
 - The pipeline of Recommendation system 
     ![overview](pics/overview.jpg)
+
 
 
 

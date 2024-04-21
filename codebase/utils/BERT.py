@@ -7,7 +7,8 @@ class Bert():
         self.model = AutoModel.from_pretrained(pretrained_model_name_or_path).to(torch.device(device)) 
         self.tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path)
         self.device = device 
-    
+        print('BERT initialized') 
+
     def getEmb(self, text):
         encoding = self.tokenizer(text, return_tensors='pt', max_length=512, truncation=True)
         encoding.to(self.device) 
@@ -37,11 +38,11 @@ class Bert():
 
 
 if __name__ == '__main__': 
-    bert = Bert(pretrained_model_name_or_path = 'weights/bert-base-uncased')  
+    bert = Bert(pretrained_model_name_or_path = 'weights/bert-base-uncased', device='cuda:0')   
 
-    print(bert.getTextSim('apple', 'orange', 0.3)) 
-    print(bert.getTextSim('apple', 'fruit', 0.3)) 
-    print(bert.getTextSim('apple', 'car', 0.3)) 
-    print(bert.getTextSim('apple', 'bus', 0.3)) 
+    print(bert.getTextSim('bannana', 'orange, a kind of fruit', 0.3)) 
+    print(bert.getTextSim('bannana', 'fruit', 0.3)) 
+    print(bert.getTextSim('bannana', 'car, a kind of transportation', 0.3)) 
+    print(bert.getTextSim('bannana', 'bus, a kind of transportation', 0.3)) 
     print(bert.getTextSim('apple', 'bannana', 0.3)) 
-    print(bert.getTextSim('apple', 'vegatable', 0.3)) 
+    print(bert.getTextSim('bannana', 'vegatable', 0.3)) 
