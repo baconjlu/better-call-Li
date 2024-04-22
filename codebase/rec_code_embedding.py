@@ -306,88 +306,10 @@ if __name__ == '__main__':
 			"store_item": ['uniform', 'wardrobe', 'clothing', 'overalls', 'tailcoat'] 
 		}
 	)
-	
+
 	rec_result = rec_store.recommend_store(
 		{"user_id": "00121"}, ["store-4", "store-5"] 
 	)
-	print(rec_result) 
-	# store_list = [
-	# 	{
-	# 		"store_name": "store-1", 
-	# 		"store_item": ['apple', 'grape', 'juice', 'milk'] 
-	# 	}, 
-	# 	{
-	# 		"store_name": "store-2", 
-	# 		"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-	# 	},
-	# 	{
-	# 		"store_name": "store-3", 
-	# 		"store_item": ['cherry', 'peach', 'pencil', 'bear'] 
-	# 	},
-	# 	{
-	# 		"store_name": "store-4", 
-	# 		"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
-	# 	}
-	# ]
-	# rec_store.update_user_preference(
-	# 	{"user_id": "00121"}, 
-	# 	[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
-	# )
-	# rec_store.update_user_preference(
-	# 	{"user_id": "00121"}, 
-	# 	[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
-	# )  
-	# rec_store.flush_user_preference({"user_id": "00121"})
-	# print(rec_store.classify_user_preference({"user_id": "00121"}, "juice"))
-	# rec_store.update_user_info(
-	# 	{"user_id": "00121"}, 
-	# 	["apple", "juice", "sossage"]
-	# ) 
-	# rec_store.update_user_info(
-	# 	{"user_id": "00121"}, 
-	# 	["lettace", "grape", "pear"] 
-	# )  
-	# rec_store.update_store_feedback(
-	# 	{"user_id": "00121"}, 
-	# 	[
-	# 		{
-	# 			"store_name": "store-1", 
-	# 			"store_item": ['apple', 'grape', 'juice', 'milk'] 
-	# 		}, 
-	# 		{
-	# 			"store_name": "store-2", 
-	# 			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-	# 		},
-	# 	], 
-	# 	0.8
-	# )
-	# rec_store.update_store_feedback(
-	# 	{"user_id": "00121"}, 
-	# 	[
-	# 		{
-	# 			"store_name": "store-1", 
-	# 			"store_item": ['apple', 'grape', 'juice', 'milk'] 
-	# 		}, 
-	# 		{
-	# 			"store_name": "store-2", 
-	# 			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-	# 		},
-	# 	], 
-	# 	0.8
-	# )
-	# rec_items = rec_store.recommend_item(
-	# 	{"user_id": "00121"}, 
-	# 	["apple", "watermelon", "orange", "peach", "car"], 
-	# 	K = 5 
-	# )
-	# print(rec_items )
-	# recommended_stores = rec_store.recommend_store({"user_id": "00121"}, store_list)
-	# for _ in recommended_stores: 
-	# 	print(_) 
-	# print(rec_store.recommend_store({"user_id": "00121"}, store_list))
-	
-
-
-
+	print(rec_result) # [['store-4', 6.0], ['store-5', 4.0]]
 
 # python rec_code_embedding.py 
