@@ -29,70 +29,65 @@
 Usage:
 ```python
 if __name__ == '__main__':  
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	)  
 
-	# rec_sys = USER_RECOMMENDATION_SYSTEM() 
-	rec_store = STORE_RECOMMENDATION_SYSTEM()  
-	store_list = [
+	# 对于用户 preference，可以个性化存储 
+	rec_store.update_user_item_preference(
+		{"user_id": "00121"}, 
+		[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
+	)
+	rec_store.update_user_item_preference(
+		{"user_id": "00121"}, 
+		[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
+	)  
+
+	# 存储商店信息
+	rec_store.update_store_info(
 		{
 			"store_name": "store-1", 
 			"store_item": ['apple', 'grape', 'juice', 'milk'] 
-		}, 
+		}
+	)
+	rec_store.update_store_info(
 		{
 			"store_name": "store-2", 
-			"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-		},
+			"store_item": ['car', 'bycicle', 'pants', 'soccer'] 
+		}
+	)
+	rec_store.update_store_info(
 		{
 			"store_name": "store-3", 
-			"store_item": ['cherry', 'peach', 'pencil', 'bear'] 
-		},
+			"store_item": ['dvd', 'mp3', 'ipad', 'computer'] 
+		}
+	)
+	
+	# 存储每个用户对于商店中商品的偏好 
+	rec_store.update_user_store_preference({"user_id": "00121"}, "store-1", 7)
+	rec_store.update_user_store_preference({"user_id": "00121"}, "store-2", 3)
+	rec_store.update_user_store_preference({"user_id": "00121"}, "store-3", 4)   
+
+
+	# 新来了两个店铺 
+	rec_store.update_store_info(
 		{
 			"store_name": "store-4", 
-			"store_item": ['lipstick', 'blueberry', 'computer', 'car'] 
+			"store_item": ['fruit', 'cherry', 'peach', 'lime', 'papaya'] 
 		}
-	]
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["apple", "juice", "sossage"]
-	) 
-	rec_store.update_user_info(
-		{"user_id": "00121"}, 
-		["lettace", "grape", "pear"] 
-	)  
-	rec_store.update_store_feedback(
-		{"user_id": "00121"}, 
-		[
-			{
-				"store_name": "store-1", 
-				"store_item": ['apple', 'grape', 'juice', 'milk'] 
-			}, 
-			{
-				"store_name": "store-2", 
-				"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-			},
-		], 
-		0.8
 	)
-	rec_store.update_store_feedback(
-		{"user_id": "00121"}, 
-		[
-			{
-				"store_name": "store-1", 
-				"store_item": ['apple', 'grape', 'juice', 'milk'] 
-			}, 
-			{
-				"store_name": "store-2", 
-				"store_item": ['bannana', 'grape', 'bottle', 'water'] 
-			},
-		], 
-		0.8
+	rec_store.update_store_info(
+		{
+			"store_name": "store-5", 
+			"store_item": ['uniform', 'wardrobe', 'clothing', 'overalls', 'tailcoat'] 
+		}
 	)
-	rec_items = rec_store.recommend_item(
-		{"user_id": "00121"}, 
-		["apple", "grape", "orange", "peach"], 
-		K = 3 
+
+	rec_result = rec_store.recommend_store(
+		{"user_id": "00121"}, ["store-4", "store-5"] 
 	)
-	print(rec_items )
-	recommended_stores = rec_store.recommend_store({"user_id": "00121"}, store_list)
-	for _ in recommended_stores: 
-		print(_) 
+	print(rec_result) # [['store-4', 6.0], ['store-5', 4.0]]
 ```
