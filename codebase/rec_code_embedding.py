@@ -56,7 +56,7 @@ class USER_RECOMMENDATION_SYSTEM:
 	
 	def select_top_K(self, user_history, item_list, K): 
 		score_list = [] 
-		for _item in tqdm(item_list): 
+		for _item in item_list: 
 			MAXIMUM_SIM = -1
 			for j in user_history: 
 				MAXIMUM_SIM = max(MAXIMUM_SIM, self.query_word_similarity(_item, j)) 
@@ -130,6 +130,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	# 	lis_store = sorted(lis_store, key = lambda x : -x[1])      
 	# 	return lis_store 
 
+
 	def recommend_store(self, user_infos, store_list): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
@@ -142,6 +143,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
 				with open(store_storage_file, 'r') as f: 
 					store_items = json.load(f)['store_item'] 
+				
 				# classify_user_preference
 				ave_score = []
 				for _item in store_items:   
@@ -176,14 +178,25 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
 			with open(store_storage_file, 'w') as f: 
 				json.dump(store_info, f)
-		else: 
+		else:      
 			return 
 
 	def update_user_store_preference(self, user_infos, store_name, score): 
 		store_storage_path = os.path.join(self.STORE_STORAGE_PATH, store_name) 
 		if os.path.exists(store_storage_path): 
 			# 此时会更新对于这个商铺的偏好 
-			store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
+			store_storage_file = os.path.join(store_storage_path, 'store_info.json')   
+			with open(store_storage_file, 'r') as f: 
+				store_data = json.load(f) 
+
+			if 'score' in store_data: 
+				store_data['score'].append(score) 
+			else: 
+				store_data['score'] = [score]
+			
+			with open(store_storage_file, 'w') as f: 
+				json.dump(store_data, f) 
+
 			with open(store_storage_file, 'r') as f: 
 				store_items = json.load(f)['store_item'] 
 			user_preference = [] 
@@ -234,7 +247,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		# 用决策树进行拟合的时候，一行一个样本
 		X_matrix = [] 
 		Y_matrix = [] 
-		for _ in tqdm(data): 
+		for _ in data: 
 			X_matrix.append(np.squeeze(self.get_word_embedding(_), axis = 0))   
 			Y_matrix.append(int(np.mean(data[_])))
 		X_matrix = np.array(X_matrix) 
@@ -306,10 +319,9 @@ if __name__ == '__main__':
 			"store_item": ['uniform', 'wardrobe', 'clothing', 'overalls', 'tailcoat'] 
 		}
 	)
-
-	rec_result = rec_store.recommend_store(
-		{"user_id": "00121"}, ["store-4", "store-5"] 
-	)
-	print(rec_result) # [['store-4', 6.0], ['store-5', 4.0]]
-
-# python rec_code_embedding.py 
+	for _ in tqdm(range(100)): 
+		rec_result = rec_store.recommend_store(
+			{"user_id": "00121"}, ["store-4", "store-5"] 
+		)
+		print(_, rec_result) # [['store-4', 6.0], ['store-5', 4.0]] 	
+	# python rec_code_embedding.py 
