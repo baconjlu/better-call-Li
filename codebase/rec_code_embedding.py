@@ -155,7 +155,8 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')     
 		if os.path.exists(user_comment_path): 
 			with open(user_comment_path, 'r') as f: 
-				origin_data = json.load(f) 
+				origin_data = json.load(f)    
+			# 用 dict 来进行存储 (存储用户对每个商品的平均打分)
 			# print(f'1-0: {origin_data}')
 			new_data = origin_data + user_preference
 			# print(f'1-1: {new_data}')	

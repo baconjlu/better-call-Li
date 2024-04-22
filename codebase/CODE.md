@@ -2,6 +2,17 @@
 
 
 
+### 
+
+- for each user, save its average score for each item, and each store 
+
+- When a new store-feedback comes, update average score for items & stores
+
+- When a new item-feedback comes, update average score for items  
+
+- When recommending stores, Rank by [average score of item in score] * F(store_score)  
+
+
 ### TODO 
 
 - BERT Inference is relatively slow, we can pre-process 30k popular english words in advance. 
@@ -9,6 +20,7 @@
 - Use GPU to infer 
 
 - Choose Random Forest to classify preference 
+
 
 
 
