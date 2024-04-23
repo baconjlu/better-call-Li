@@ -191,7 +191,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			return_lis = [] 
 			for _ in store_list: 
 				return_lis.append((_, 0)) 
-			return return_lis 
+			return return_lis     
 		elif self.get_user_item_preference_number(user_infos) >= MLTHRESHOLD: 
 			rec_list = [] 
 			for _store in store_list: 
