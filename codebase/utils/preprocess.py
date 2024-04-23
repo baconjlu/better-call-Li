@@ -20,17 +20,18 @@ if __name__ == '__main__':
 
 	# self.bert_model.getEmb(q_word).detach().cpu().numpy()
 	cnt = 0 
-	NUM = 3
+	NUM = 2
 	total_cnt = 0 
 	save_freq = 1000 
 
 	pretrained_embed = {}     
 	print(len(words)) 
 
-	for _ in tqdm(words):    
+	# words = words[112997:]
+	keys = list(words.keys())[112997 : ]    
+	for _ in tqdm(keys):     
 		total_cnt += 1 
 		current_word = _
-
 		word_vec = bert_model.getEmb(current_word).detach().cpu().numpy()
 		pretrained_embed[current_word] = word_vec
 		if (total_cnt % save_freq == 0) or (total_cnt == len(words)): 
