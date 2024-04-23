@@ -211,13 +211,16 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			for _ in item_scores: 
 				return_lis.append((_, item_scores[_])) 
 			return return_lis	   
-		
+	
+	# 返回的是 [store_name, 分数]
 	def recommend_store(self, user_infos, store_list): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
-			# 没有，那就随机推荐就行 
-
-			return store_list 
+			# 没有用户信息，那就随机推荐就行 
+			return_lis = [] 
+			for _ in store_list: 
+				return_lis.append((_, 0)) 
+			return return_lis 
 		else: 
 			rec_list = [] 
 			for _store in store_list: 
@@ -286,6 +289,15 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				user_preference.append((_item, score)) 
 			self.update_user_item_preference(user_infos, user_preference) 
 
+	def get_user_item_preference_number(self, user_infos): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		if not os.path.exists(user_storage_path):
+			return 0 
+		else: 
+			user_comment_path = os.path.join(user_storage_path, 'item_preference.json')        
+			with open(user_comment_path, 'r') as f: 
+				return len(json.load(f)) 
+			
 	def update_user_item_preference(self, user_infos, user_preference):  
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
