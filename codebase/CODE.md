@@ -13,13 +13,14 @@
 - When recommending stores, Rank by [average score of item in score] * F(store_score)  
 
 
+
 ### TODO 
 
-- BERT Inference is relatively slow, we can pre-process 30k popular english words in advance. 
+- BERT Inference is relatively slow, we can pre-process 30k popular english words in advance.(Doing Now)  
 
-- Use GPU to infer 
+- Use GPU to infer (Done)
 
-- Choose Random Forest to classify preference 
+- Choose Random Forest to classify preference (Done) 
 
 
 

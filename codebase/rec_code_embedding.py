@@ -1,3 +1,4 @@
+import sys 
 import numpy as np 
 import pandas as pd  
 import os  
@@ -96,7 +97,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			device = device, 
 			embedding_storage_path = embdding_storage_path
 		)  
-		
+	
 	# 推荐商户
 
 	# 0.5 是一个门槛（ >= 0.5, 号； <= 0.5，差） 
@@ -130,11 +131,92 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	# 	lis_store = sorted(lis_store, key = lambda x : -x[1])      
 	# 	return lis_store 
 
+	def update_user_preference_tag(self, user_infos, preference_tag): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		user_preference_tag_path = os.path.join(user_storage_path, 'preference_tag.json')
+		if not os.path.exists(user_storage_path):
+			os.makedirs(user_storage_path)  
+			with open(user_preference_tag_path, 'w') as f: 
+				json.dump({'tag': preference_tag}, f) 
+		else: 
+			with open(user_preference_tag_path, 'w') as f: 
+				current_data = json.load(f) 
+			current_data['tag'] += preference_tag  
+			with open(user_preference_tag_path, 'w') as f: 
+				json.dump(current_data, f) 
 
+	# 返回一个 list, list 中每个元素是二元组 (store, store_score) 
+	def recommend_store_by_user_preference_tag(self, user_infos, store_list): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		user_preference_tag_path = os.path.join(user_storage_path, 'preference_tag.json')
+
+		if not os.path.exists(user_preference_tag_path):
+			# 不存在, 直接返回 
+			return_lis = [] 
+			for _ in store_list: 
+				return_lis.append((_, 0)) 
+			return return_lis 
+		else: 
+			# 存在, 可以根据这个粗略进行推荐 
+			with open(user_preference_tag_path, 'r') as f: 
+				preference_tags = json.load(f) 
+			# tag 
+			store_scores = defaultdict(list) 
+			for _word in preference_tags['tag']: 
+				# _word 是偏好单词 
+				for _store in store_list: 
+					store_storage_path = os.path.join(self.STORE_STORAGE_PATH, _store) 
+					store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
+					with open(store_storage_file, 'r') as f: 
+						store_items = json.load(f)['store_item']     
+					# 计算 store_items 和这个 _word 的 embedding 相似度 (平均)
+					ave_score = []
+					for _item in store_items:
+						cur_score = self.bert_model.getTextSim(_word, _item)
+						ave_score.append(cur_score) 
+					store_scores[_store].append(np.mean(ave_score)) 
+			for _ in store_scores: 
+				store_scores[_] = np.mean(store_scores[_]) 
+			return_lis = [] 
+			for _ in store_scores: 
+				return_lis.append((_, store_scores[_])) 
+			return return_lis		
+
+	def recommend_item_by_user_preference_tag(self, user_infos, item_list): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		user_preference_tag_path = os.path.join(user_storage_path, 'preference_tag.json')
+		if not os.path.exists(user_preference_tag_path):
+			# 不存在, 直接返回 
+			return_lis = [] 
+			for _ in item_list: 
+				return_lis.append((_, 0)) 
+			return return_lis   
+		else: 
+			# 存在, 可以根据这个粗略进行推荐 
+			with open(user_preference_tag_path, 'r') as f: 
+				preference_tags = json.load(f) 
+			# tag 
+			item_scores = defaultdict(list) 
+			
+			# _word 是偏好单词 
+			for _item in item_list:
+				ave_score = []
+				for _word in preference_tags['tag']: 
+					cur_score = self.bert_model.getTextSim(_word, _item)
+					ave_score.append(cur_score) 
+				item_scores[_item].append(np.mean(ave_score)) 
+			for _ in item_scores: 
+				item_scores[_] = np.mean(item_scores[_]) 
+			return_lis = [] 
+			for _ in item_scores: 
+				return_lis.append((_, item_scores[_])) 
+			return return_lis	   
+		
 	def recommend_store(self, user_infos, store_list): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
 			# 没有，那就随机推荐就行 
+
 			return store_list 
 		else: 
 			rec_list = [] 
@@ -270,6 +352,14 @@ if __name__ == '__main__':
 		classifier_name = 'decision_tree'
 	)  
 
+	# 初期：会只根据几个关键词来对用户进行建模 
+	rec_store.update_user_preference_tag(
+		{"user_id": "00121"}, 
+		['apple', 'fruit', 'computers', 'sport', 'clothings'] 
+	)  
+
+
+	sys.exit(0) 
 	# 对于用户 preference，可以个性化存储 
 	rec_store.update_user_item_preference(
 		{"user_id": "00121"}, 
