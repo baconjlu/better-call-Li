@@ -1,0 +1,33 @@
+<s>[INST] <<SYS>>
+
+1. You are an experienced recommendation system designed to select products most relevant to the user's perference.
+
+2. Note that if the prodect is in the Like List, just recommend it.
+
+3. ALWAYS answer with a list of product.
+
+<</SYS>>
+
+### 1
+
+Like List: ["Apple", "Pizza"]
+
+Product List: ["Banana", "Piano", "Car", "Cake", "Pizza", "Tablet", "Shoes", "Hat", "Camera", "Headphones"]
+
+Respond: ["Banana", "Cake", "Pizza"]
+
+### 2
+
+Like List: ["T-shirt", "Jeans"]
+
+Product List: ["Banana", "Piano", "Car", "Cake", "Pizza", "Tablet", "Shoes", "Hat", "Camera", "Headphones"]
+
+Respond: ["Shoes", "Hat"]
+
+### 3
+
+Like List: {{Pos}}
+
+Product List: {{Product List}}
+
+Respond:

@@ -10,6 +10,7 @@ from collections import defaultdict
 from sklearn.tree import DecisionTreeClassifier
 import pickle 
 from utils.preprocess_input import get_feedback_to_store, get_store_information, get_user_information
+from utils.LLAMA import LLAMA
 MLTHRESHOLD = 30 
 class USER_RECOMMENDATION_SYSTEM:
 	def __init__(self, 
@@ -339,14 +340,24 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		dec.fit(X_matrix, Y_matrix)  
 		with open(user_classifier_path, 'wb') as f: 
 			pickle.dump(dec, f) 
-
+	def get_user_item_preference(self, user_infos): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])   
+		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')   
+		if os.path.exists(user_comment_path):      
+			with open(user_comment_path, 'r') as f: 
+				data = json.load(f)  
+			for _ in data: 
+				data[_] = np.mean(data[_])   
+			return data 
+		else: 
+			return None  
 # 可以这么做, 如果一个用户对之前推荐的结果不满意，就将这些商店的权重降低 
 
 # 用户反馈   
 
 # python rec_code_embedding.py 
 # [['12584', 4.0], ['25455', 9.0], ['34506', 5.666666666666667]]    
-def test_example_3(): 
+def test_example_3(llama): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
 		storage_path = 'datas/storage/user', 
 		device = 'cuda:0', 
@@ -384,11 +395,32 @@ def test_example_3():
 		rec_store.update_store_info(_)
 	user_info_query  = get_user_information(path_user[0]) 
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+ 	
+	dic = rec_store.get_user_item_preference(user_info_query)
+	pos_list = []
+	neg_list = []
+	for _ in dic: 
+		if dic[_] >= 7: 
+			pos_list.append(_) 
+		if dic[_] <= 4: 
+			neg_list.append(_)
+
+	report = llama.get_report(pos_list, neg_list)
+	print(report)
 	sys.exit(0) 
 
 # BERT initialized
 # datas/storage/user/12345/preference_tag.json
 # [('12584', 0.8468737900257111), ('25455', 0.8430418074131012), ('79553', 0.7953134179115295), ('34506', 0.8210707008838654)]
+'''
+Based on your browsing history, it appears that you have a strong interest in various electronic devices, including tablets, laptops, headphones, smartphones, routers, portable speakers, gaming monitors, and desktop PCs. These purchases suggest a desire for cutting-edge technology and the latest advancements in the field. Additionally, your interest in smartwatches and earbuds highlights your enthusiasm for wearable technology and personalized entertainment.
+
+On the other hand, your dislikes reveal a preference for non-electronic items such as furniture, home & garden, office supplies, photography, kitchenware, music, home decor, and pantry staples. These categories suggest a focus on improving one's living space and daily routines, as well as a desire for more traditional forms of entertainment and relaxation.
+
+In summary, your shopping habits suggest a keen interest in the latest electronic devices and technology, alongside a desire for practical and functional items for daily life. You tend to avoid electronics that are not directly related to personal entertainment or productivity, as well as categories that cater more towards home decor or culinary needs.
+
+Please provide your actual interest and dislikes for a more accurate report.
+'''
 
 def test_example_2(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
@@ -436,14 +468,22 @@ def test_example_1():
 	# print(store_query_list) 
 	user_info_query  = get_user_information(path_user[0])    
 	if 'user_preference' in user_info_query: 
-		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference'])
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
 	sys.exit(0) 
 if __name__ == '__main__':  
+	if os.path.exists("datas"):
+		try: 
+			os.rmdir("datas")
+		except: 
+			print("GOOD")
+	
 	# test_example_1() 
-	test_example_2() 
-	# test_example_3() 
- 
+	# test_example_2() 
+	llama = LLAMA("/home/mazhouyuan/LLAMA/Llama-2-7b-chat-hf", gpu_id = '1')
+	test_example_3(llama)
+
+
 	# # 初期：会只根据几个关键词来对用户进行建模 
 	# rec_store.update_user_preference_tag(
 	# 	{"user_id": "00121"}, 
