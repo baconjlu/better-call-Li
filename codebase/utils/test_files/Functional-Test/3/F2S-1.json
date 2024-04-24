@@ -1,0 +1,161 @@
+{
+  "InterfaceId": 17,
+  "CurrentUser": "12345",
+  "Feedback": {
+    "Item": {
+      "storeId": 1,
+      "storeName": "Huawei Experience Store",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "address": "123 Broadway, New York, NY 10001"
+      },
+      "items": [
+        {
+          "itemId": 123,
+          "itemName": "Huawei P50 Pro",
+          "itemCategory": "Smartphone",
+          "itemPrice": 999.00,
+          "itemDescription": "Capture the wonder of life's moments with the Huawei P50 Pro."
+        },
+        {
+          "itemId": 124,
+          "itemName": "MateBook X Pro",
+          "itemCategory": "Laptop",
+          "itemPrice": 1499.00,
+          "itemDescription": "Immerse yourself in the ultimate computing experience with the MateBook X Pro."
+        },
+        {
+          "itemId": 125,
+          "itemName": "FreeBuds Pro",
+          "itemCategory": "Earbuds",
+          "itemPrice": 199.00,
+          "itemDescription": "Experience superior sound and comfort with Huawei FreeBuds Pro."
+        },
+        {
+          "itemId": 126,
+          "itemName": "Huawei Watch GT 3",
+          "itemCategory": "Smartwatch",
+          "itemPrice": 249.00,
+          "itemDescription": "Stay connected and active with the Huawei Watch GT 3."
+        },
+        {
+          "itemId": 127,
+          "itemName": "Huawei MatePad Pro",
+          "itemCategory": "Tablet",
+          "itemPrice": 799.00,
+          "itemDescription": "Unleash your creativity and productivity with the Huawei MatePad Pro."
+        },
+        {
+          "itemId": 128,
+          "itemName": "Huawei Sound X",
+          "itemCategory": "Smart Speaker",
+          "itemPrice": 299.00,
+          "itemDescription": "Elevate your audio experience with the Huawei Sound X smart speaker."
+        },
+        {
+          "itemId": 129,
+          "itemName": "Huawei MateView",
+          "itemCategory": "Monitor",
+          "itemPrice": 699.00,
+          "itemDescription": "Immerse yourself in stunning visuals with the Huawei MateView monitor."
+        },
+        {
+          "itemId": 130,
+          "itemName": "Huawei WiFi AX3",
+          "itemCategory": "Router",
+          "itemPrice": 129.00,
+          "itemDescription": "Enjoy lightning-fast internet speeds with the Huawei WiFi AX3 router."
+        },
+        {
+          "itemId": 131,
+          "itemName": "Huawei Body Fat Scale 3",
+          "itemCategory": "Health & Fitness",
+          "itemPrice": 79.00,
+          "itemDescription": "Track your health and fitness goals with the Huawei Body Fat Scale 3."
+        },
+        {
+          "itemId": 132,
+          "itemName": "Huawei 12000mAh SuperCharge Power Bank",
+          "itemCategory": "Accessories",
+          "itemPrice": 59.00,
+          "itemDescription": "Stay powered up on the go with the Huawei 12000mAh SuperCharge Power Bank."
+        },
+        {
+          "itemId": 133,
+          "itemName": "Huawei MateBook 14",
+          "itemCategory": "Laptop",
+          "itemPrice": 1099.00,
+          "itemDescription": "Experience powerful performance in a sleek design with the Huawei MateBook 14."
+        },
+        {
+          "itemId": 134,
+          "itemName": "Huawei Watch Fit",
+          "itemCategory": "Smartwatch",
+          "itemPrice": 129.00,
+          "itemDescription": "Stay active and stylish with the Huawei Watch Fit smartwatch."
+        },
+        {
+          "itemId": 135,
+          "itemName": "Huawei FreeBuds 4i",
+          "itemCategory": "Earbuds",
+          "itemPrice": 99.00,
+          "itemDescription": "Enjoy immersive audio on the go with the Huawei FreeBuds 4i."
+        },
+        {
+          "itemId": 136,
+          "itemName": "Huawei MateStation S",
+          "itemCategory": "Desktop PC",
+          "itemPrice": 799.00,
+          "itemDescription": "Power your productivity with the Huawei MateStation S desktop PC."
+        },
+        {
+          "itemId": 137,
+          "itemName": "Huawei Smart Scale",
+          "itemCategory": "Health & Fitness",
+          "itemPrice": 49.00,
+          "itemDescription": "Track your weight and more with the Huawei Smart Scale."
+        },
+        {
+          "itemId": 138,
+          "itemName": "Huawei MateBook D 15",
+          "itemCategory": "Laptop",
+          "itemPrice": 699.00,
+          "itemDescription": "Get things done on the go with the Huawei MateBook D 15 laptop."
+        },
+        {
+          "itemId": 139,
+          "itemName": "Huawei FreeLace Pro",
+          "itemCategory": "Earbuds",
+          "itemPrice": 119.00,
+          "itemDescription": "Experience high-quality sound and comfort with Huawei FreeLace Pro."
+        },
+        {
+          "itemId": 140,
+          "itemName": "Huawei MateView GT",
+          "itemCategory": "Gaming Monitor",
+          "itemPrice": 499.00,
+          "itemDescription": "Immerse yourself in gaming with the Huawei MateView GT gaming monitor."
+        },
+        {
+          "itemId": 141,
+          "itemName": "Huawei MateBook E",
+          "itemCategory": "2-in-1 Laptop",
+          "itemPrice": 1299.00,
+          "itemDescription": "Experience versatility and performance with the Huawei MateBook E 2-in-1 laptop."
+        },
+        {
+          "itemId": 142,
+          "itemName": "Huawei Sound Joy",
+          "itemCategory": "Portable Speaker",
+          "itemPrice": 79.00,
+          "itemDescription": "Take your music anywhere with the Huawei Sound Joy portable speaker."
+        }
+      ],
+      "storeDescription": "Explore the latest Huawei innovations at our flagship store."
+    },
+    "comment": "The Huawei P50 Pro exceeded my expectations in every way!",
+    "rating": 9,
+    "UserId": "12345"
+  }
+}

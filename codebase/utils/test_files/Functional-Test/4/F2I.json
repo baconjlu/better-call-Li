@@ -1,0 +1,572 @@
+[
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 1,
+        "ItemName": "Banana",
+        "ItemPrice": 0.50,
+        "ItemDescription": "Fresh and ripe banana.",
+        "ItemImage": "YmF6YW5hCg",
+        "ItemStoreId": 123,
+        "ItemStoreName": "Fruit Haven",
+        "customerVisits": 500
+      },
+      "comment": "I am extremely satisfied with my purchase.",
+      "rating": 10,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 2,
+        "ItemName": "Apple",
+        "ItemPrice": 0.75,
+        "ItemDescription": "Juicy and crisp apple.",
+        "ItemImage": "YXBwbGU=",
+        "ItemStoreId": 124,
+        "ItemStoreName": "Apple Orchard",
+        "customerVisits": 300
+      },
+      "comment": "Great quality apples!",
+      "rating": 9,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 3,
+        "ItemName": "Orange",
+        "ItemPrice": 0.60,
+        "ItemDescription": "Sweet and tangy orange.",
+        "ItemImage": "b3Jhbmdl",
+        "ItemStoreId": 125,
+        "ItemStoreName": "Citrus Corner",
+        "customerVisits": 400
+      },
+      "comment": "Delicious oranges!",
+      "rating": 8,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 4,
+        "ItemName": "Grapes",
+        "ItemPrice": 1.20,
+        "ItemDescription": "Sweet and succulent grapes.",
+        "ItemImage": "Z3JhcGVz",
+        "ItemStoreId": 126,
+        "ItemStoreName": "Vineyard Delights",
+        "customerVisits": 250
+      },
+      "comment": "Love these grapes!",
+      "rating": 9,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 5,
+        "ItemName": "Strawberry",
+        "ItemPrice": 1.50,
+        "ItemDescription": "Fresh and sweet strawberries.",
+        "ItemImage": "c3RyYXdiZXJyeQ==",
+        "ItemStoreId": 127,
+        "ItemStoreName": "Berry Bliss",
+        "customerVisits": 350
+      },
+      "comment": "Amazing strawberries!",
+      "rating": 10,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 6,
+        "ItemName": "Pineapple",
+        "ItemPrice": 1.80,
+        "ItemDescription": "Juicy and tropical pineapple.",
+        "ItemImage": "cGluZWFwcGxl",
+        "ItemStoreId": 128,
+        "ItemStoreName": "Tropical Treats",
+        "customerVisits": 200
+      },
+      "comment": "Best pineapple ever!",
+      "rating": 10,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 7,
+        "ItemName": "Watermelon",
+        "ItemPrice": 2.00,
+        "ItemDescription": "Refreshing and sweet watermelon.",
+        "ItemImage": "d2F0ZXJtZWxvbg==",
+        "ItemStoreId": 129,
+        "ItemStoreName": "Melon Madness",
+        "customerVisits": 150
+      },
+      "comment": "Perfect for a hot day!",
+      "rating": 9,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 8,
+        "ItemName": "Mango",
+        "ItemPrice": 1.70,
+        "ItemDescription": "Sweet and exotic mango.",
+        "ItemImage": "bWFuZ28=",
+        "ItemStoreId": 130,
+        "ItemStoreName": "Mango Haven",
+        "customerVisits": 180
+      },
+      "comment": "Absolutely delicious mangoes!",
+      "rating": 10,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 9,
+        "ItemName": "Kiwi",
+        "ItemPrice": 0.90,
+        "ItemDescription": "Tangy and refreshing kiwi.",
+        "ItemImage": "a2l3aQ==",
+        "ItemStoreId": 131,
+        "ItemStoreName": "Kiwi Kingdom",
+        "customerVisits": 220
+      },
+      "comment": "Love the kiwis!",
+      "rating": 9,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 10,
+        "ItemName": "Peach",
+        "ItemPrice": 1.20,
+        "ItemDescription": "Sweet and juicy peach.",
+        "ItemImage": "cGVhY2g=",
+        "ItemStoreId": 132,
+        "ItemStoreName": "Peach Paradise",
+        "customerVisits": 280
+      },
+      "comment": "Delicious peaches!",
+      "rating": 9,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 1,
+        "ItemName": "Antique Brass Lamp",
+        "ItemPrice": 299.00,
+        "ItemDescription": "Elegant vintage lamp with intricate details.",
+        "ItemImage": "YmF6YW5hCg",
+        "ItemStoreId": 123,
+        "ItemStoreName": "Antique Emporium",
+        "customerVisits": 500
+      },
+      "comment": "I had a terrible experience with my purchase. The item I received was not as described and was in poor condition. Extremely disappointed.",
+      "rating": 2,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "54321",
+    "Feedback": {
+      "Item": {
+        "ItemId": 2,
+        "ItemName": "Rusty Vintage Bicycle",
+        "ItemPrice": 150.00,
+        "ItemDescription": "Vintage bicycle with a rusty frame and worn-out tires.",
+        "ItemImage": "cnVzdHkK",
+        "ItemStoreId": 456,
+        "ItemStoreName": "Retro Bikes",
+        "customerVisits": 250
+      },
+      "comment": "The bicycle arrived in terrible condition, completely rusty and almost unusable. Waste of money!",
+      "rating": 1,
+      "UserId": "54321"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "67890",
+    "Feedback": {
+      "Item": {
+        "ItemId": 3,
+        "ItemName": "Broken Pocket Watch",
+        "ItemPrice": 75.00,
+        "ItemDescription": "Vintage pocket watch with a broken mechanism.",
+        "ItemImage": "cG9ja2V0d2F0Y2gK",
+        "ItemStoreId": 789,
+        "ItemStoreName": "Timeless Treasures",
+        "customerVisits": 100
+      },
+      "comment": "The pocket watch was broken beyond repair when it arrived. Such a disappointment!",
+      "rating": 1,
+      "UserId": "67890"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "54321",
+    "Feedback": {
+      "Item": {
+        "ItemId": 4,
+        "ItemName": "Cracked Ceramic Vase",
+        "ItemPrice": 120.00,
+        "ItemDescription": "Antique ceramic vase with noticeable cracks.",
+        "ItemImage": "Y2FtZXJpYy12YXNlCg",
+        "ItemStoreId": 987,
+        "ItemStoreName": "Artisan Antiques",
+        "customerVisits": 300
+      },
+      "comment": "The vase I received had several cracks and imperfections, definitely not worth the price.",
+      "rating": 2,
+      "UserId": "54321"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "23456",
+    "Feedback": {
+      "Item": {
+        "ItemId": 5,
+        "ItemName": "Tarnished Silver Teapot",
+        "ItemPrice": 90.00,
+        "ItemDescription": "Antique silver teapot with heavy tarnishing.",
+        "ItemImage": "c2lsdmVyLXRlYXBvdAo",
+        "ItemStoreId": 654,
+        "ItemStoreName": "Silver Splendor",
+        "customerVisits": 150
+      },
+      "comment": "The teapot was so tarnished that it looked more like a piece of scrap metal. Disappointed with the quality!",
+      "rating": 1,
+      "UserId": "23456"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "78901",
+    "Feedback": {
+      "Item": {
+        "ItemId": 6,
+        "ItemName": "Faded Persian Rug",
+        "ItemPrice": 400.00,
+        "ItemDescription": "Antique Persian rug with faded colors and worn-out edges.",
+        "ItemImage": "cGVyc2lhbi1ydWcK",
+        "ItemStoreId": 321,
+        "ItemStoreName": "Rug Revival",
+        "customerVisits": 200
+      },
+      "comment": "The rug I received was nothing like the vibrant colors shown in the pictures. It looked old and faded. Not satisfied at all!",
+      "rating": 2,
+      "UserId": "78901"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "23456",
+    "Feedback": {
+      "Item": {
+        "ItemId": 7,
+        "ItemName": "Chipped Marble Statue",
+        "ItemPrice": 600.00,
+        "ItemDescription": "Antique marble statue with noticeable chips and cracks.",
+        "ItemImage": "bWFyYmxlLXN0YXR1ZGUtd2FzdAo",
+        "ItemStoreId": 135,
+        "ItemStoreName": "Marble Masterpieces",
+        "customerVisits": 400
+      },
+      "comment": "The statue arrived with chips and cracks all over it. Not what I expected for the price.",
+      "rating": 2,
+      "UserId": "23456"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "78901",
+    "Feedback": {
+      "Item": {
+        "ItemId": 8,
+        "ItemName": "Weathered Wooden Chest",
+        "ItemPrice": 250.00,
+        "ItemDescription": "Vintage wooden chest with signs of weathering and damage.",
+        "ItemImage": "d29vZGVuLWNoZXN0Cg",
+        "ItemStoreId": 642,
+        "ItemStoreName": "Timber Treasures",
+        "customerVisits": 300
+      },
+      "comment": "The chest I received looked like it had been sitting in a damp cellar for years. Not worth the price!",
+      "rating": 1,
+      "UserId": "78901"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "89012",
+    "Feedback": {
+      "Item": {
+        "ItemId": 9,
+        "ItemName": "Damaged Crystal Decanter",
+        "ItemPrice": 180.00,
+        "ItemDescription": "Antique crystal decanter with noticeable chips and scratches.",
+        "ItemImage": "Y3J5c3RhbC1kZWNhbnRlcg==Cg",
+        "ItemStoreId": 246,
+        "ItemStoreName": "Crystal Clear",
+        "customerVisits": 250
+      },
+      "comment": "The crystal decanter arrived with several chips and scratches, making it look cheap and poorly made. Very disappointed!",
+      "rating": 1,
+      "UserId": "89012"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "34567",
+    "Feedback": {
+      "Item": {
+        "ItemId": 10,
+        "ItemName": "Tattered Leather Armchair",
+        "ItemPrice": 350.00,
+        "ItemDescription": "Vintage leather armchair with tears and stains.",
+        "ItemImage": "bGVhdGhlci1hcm1jaGFpcg==Cg",
+        "ItemStoreId": 753,
+        "ItemStoreName": "Leather Luxe",
+        "customerVisits": 200
+      },
+      "comment": "The armchair I received had tears and stains all over it. It looked more like a piece of garbage than a vintage item. Disappointed!",
+      "rating": 1,
+      "UserId": "34567"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "23456",
+    "Feedback": {
+      "Item": {
+        "ItemId": 11,
+        "ItemName": "Worn-Out Music Box",
+        "ItemPrice": 120.00,
+        "ItemDescription": "Vintage music box with a broken mechanism and missing key parts.",
+        "ItemImage": "bXVzaWMtYm94Cg",
+        "ItemStoreId": 864,
+        "ItemStoreName": "Melody Memories",
+        "customerVisits": 150
+      },
+      "comment": "The music box arrived in terrible condition, with a broken mechanism and missing key parts. Completely unusable!",
+      "rating": 1,
+      "UserId": "23456"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "89012",
+    "Feedback": {
+      "Item": {
+        "ItemId": 12,
+        "ItemName": "Frayed Silk Scarf",
+        "ItemPrice": 80.00,
+        "ItemDescription": "Antique silk scarf with frayed edges and discoloration.",
+        "ItemImage": "c2lsay1zY2FyZg==Cg",
+        "ItemStoreId": 951,
+        "ItemStoreName": "Silk Elegance",
+        "customerVisits": 100
+      },
+      "comment": "The silk scarf I received was so frayed and discolored that it looked like it had been dragged through the mud. Not worth the price!",
+      "rating": 1,
+      "UserId": "89012"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "67890",
+    "Feedback": {
+      "Item": {
+        "ItemId": 13,
+        "ItemName": "Stained Porcelain Figurine",
+        "ItemPrice": 150.00,
+        "ItemDescription": "Antique porcelain figurine with noticeable stains and discoloration.",
+        "ItemImage": "cG9ybWluZXMtZmlndXJpbmUK",
+        "ItemStoreId": 357,
+        "ItemStoreName": "Porcelain Perfection",
+        "customerVisits": 200
+      },
+      "comment": "The figurine I received had stains and discoloration all over it. It looked like it had been stored in a damp basement for years. Disappointed!",
+      "rating": 1,
+      "UserId": "67890"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "34567",
+    "Feedback": {
+      "Item": {
+        "ItemId": 14,
+        "ItemName": "Rusted Metal Trunk",
+        "ItemPrice": 100.00,
+        "ItemDescription": "Vintage metal trunk with heavy rust and dents.",
+        "ItemImage": "cmVkdXN0ZWQtbWV0YWwtdHJ1bmsK",
+        "ItemStoreId": 852,
+        "ItemStoreName": "Rustic Relics",
+        "customerVisits": 150
+      },
+      "comment": "The metal trunk I received was covered in rust and dents. It looked like it had been salvaged from a junkyard. Not satisfied!",
+      "rating": 1,
+      "UserId": "34567"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "12345",
+    "Feedback": {
+      "Item": {
+        "ItemId": 15,
+        "ItemName": "Faded Oil Painting",
+        "ItemPrice": 200.00,
+        "ItemDescription": "Vintage oil painting with faded colors and damaged canvas.",
+        "ItemImage": "b2lsLXBhaW5pbmcK",
+        "ItemStoreId": 369,
+        "ItemStoreName": "Canvas Creations",
+        "customerVisits": 300
+      },
+      "comment": "The oil painting I received had faded colors and a damaged canvas. It looked nothing like the vibrant artwork shown in the pictures. Disappointed!",
+      "rating": 1,
+      "UserId": "12345"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "67890",
+    "Feedback": {
+      "Item": {
+        "ItemId": 16,
+        "ItemName": "Cracked Glass Decanter",
+        "ItemPrice": 120.00,
+        "ItemDescription": "Antique glass decanter with noticeable cracks.",
+        "ItemImage": "Z2xhc3MtZGVjYW50ZXIK",
+        "ItemStoreId": 741,
+        "ItemStoreName": "Glass Galore",
+        "customerVisits": 200
+      },
+      "comment": "The glass decanter arrived with noticeable cracks all over it. It looked like it could shatter at any moment. Not worth the risk!",
+      "rating": 1,
+      "UserId": "67890"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "54321",
+    "Feedback": {
+      "Item": {
+        "ItemId": 17,
+        "ItemName": "Frayed Lace Tablecloth",
+        "ItemPrice": 80.00,
+        "ItemDescription": "Vintage lace tablecloth with frayed edges and holes.",
+        "ItemImage": "bGFjZS10YWJsZWNsb3Nobwo=",
+        "ItemStoreId": 258,
+        "ItemStoreName": "Lace Luxuries",
+        "customerVisits": 150
+      },
+      "comment": "The lace tablecloth I received had frayed edges and holes all over it. It looked like it had been chewed up by rats. Disappointed!",
+      "rating": 1,
+      "UserId": "54321"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "89012",
+    "Feedback": {
+      "Item": {
+        "ItemId": 18,
+        "ItemName": "Dented Copper Kettle",
+        "ItemPrice": 90.00,
+        "ItemDescription": "Antique copper kettle with noticeable dents and scratches.",
+        "ItemImage": "Y29wcGVyLWtldHRsZXM=",
+        "ItemStoreId": 159,
+        "ItemStoreName": "Copper Classics",
+        "customerVisits": 200
+      },
+      "comment": "The copper kettle I received had noticeable dents and scratches all over it. It looked like it had been kicked around like a soccer ball. Not satisfied!",
+      "rating": 1,
+      "UserId": "89012"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "23456",
+    "Feedback": {
+      "Item": {
+        "ItemId": 19,
+        "ItemName": "Torn Velvet Drapes",
+        "ItemPrice": 150.00,
+        "ItemDescription": "Vintage velvet drapes with tears and stains.",
+        "ItemImage": "dmVsdmV0LWRyYXBlcwo=",
+        "ItemStoreId": 753,
+        "ItemStoreName": "Velvet Visions",
+        "customerVisits": 150
+      },
+      "comment": "The velvet drapes I received had tears and stains all over them. They looked like they had been used as rags in a mechanic's shop. Disappointed!",
+      "rating": 1,
+      "UserId": "23456"
+    }
+  },
+  {
+    "InterfaceId": 18,
+    "CurrentUser": "34567",
+    "Feedback": {
+      "Item": {
+        "ItemId": 20,
+        "ItemName": "Moldy Book Collection",
+        "ItemPrice": 120.00,
+        "ItemDescription": "Collection of vintage books with mold and water damage.",
+        "ItemImage": "bW9sZHktYm9vay1jbGVjdGlvbg==",
+        "ItemStoreId": 357,
+        "ItemStoreName": "Book Bazaar",
+        "customerVisits": 200
+      },
+      "comment": "The vintage books I received were covered in mold and water damage. They smelled terrible and were completely unusable. Not worth the price!",
+      "rating": 1,
+      "UserId": "34567"
+    }
+  }
+]

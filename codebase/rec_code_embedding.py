@@ -9,6 +9,7 @@ from utils.BERT import Bert
 from collections import defaultdict  
 from sklearn.tree import DecisionTreeClassifier
 import pickle 
+from utils.preprocess_input import get_feedback_to_store, get_store_information, get_user_information
 MLTHRESHOLD = 30 
 class USER_RECOMMENDATION_SYSTEM:
 	def __init__(self, 
@@ -32,7 +33,6 @@ class USER_RECOMMENDATION_SYSTEM:
 	def query_word_similarity(self, word1, word2): 
 		calc_sim = self.bert_model.getTextSim(word1, word2, 0) 
 		return calc_sim[1] 
-
 	
 	def get_user_history_path(self, user_id): 
 		user_storage_path = os.path.join(self.STORAGE_PATH, user_id) 
@@ -106,8 +106,10 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				json.dump({'tag': preference_tag}, f) 
 		else: 
 			with open(user_preference_tag_path, 'r') as f: 
-				current_data = json.load(f) 
+				current_data = json.load(f)  
 			current_data['tag'] += preference_tag  
+			# 去重 
+			current_data['tag'] = set(current_data['tag'])
 			with open(user_preference_tag_path, 'w') as f: 
 				json.dump(current_data, f) 
 
@@ -130,22 +132,41 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				preference_tags = json.load(f) 
 			# tag 
 			store_scores = defaultdict(list) 
-			for _word in preference_tags['tag']: 
-				# _word 是偏好单词 
-				for _store in store_list: 
-					store_storage_path = os.path.join(self.STORE_STORAGE_PATH, _store) 
-					store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
-					with open(store_storage_file, 'r') as f: 
-						store_items = json.load(f)['store_item']     
-					# 计算 store_items 和这个 _word 的 embedding 相似度 (平均)
-					ave_score = []
-					for _item in store_items:
-						cur_score = self.bert_model.getTextSim(_word, _item)
-						ave_score.append(cur_score) 
-					store_scores[_store].append(np.mean(ave_score)) 
-			for _ in store_scores: 
-				print(_, store_scores[_]) 
-				store_scores[_] = np.mean(store_scores[_]) 
+			
+			# 应该是一个 store 对每个单词维护一个 max 
+
+			for _store in store_list: 
+				store_storage_path = os.path.join(self.STORE_STORAGE_PATH, _store) 
+				store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
+				with open(store_storage_file, 'r') as f: 
+					store_items = json.load(f)['store_item']     
+				# 现在获得该商店的所有商品了 
+				max_values = [] 
+				for _word in preference_tags['tag']: 
+					max_value = 0 
+					for _item in store_items: 
+						cur_score = self.bert_model.getTextSim(_word, _item) 
+						max_value = max(max_value, cur_score) 
+					max_values.append(max_value) 
+				store_scores[_store] = np.mean(max_values) 
+
+
+			# for _word in preference_tags['tag']: 
+			# 	# _word 是偏好单词 
+			# 	for _store in store_list: 
+			# 		store_storage_path = os.path.join(self.STORE_STORAGE_PATH, _store) 
+			# 		store_storage_file = os.path.join(store_storage_path, 'store_info.json') 
+			# 		with open(store_storage_file, 'r') as f: 
+			# 			store_items = json.load(f)['store_item']     
+			# 		# 计算 store_items 和这个 _word 的 embedding 相似度 (平均)
+			# 		ave_score = []
+			# 		for _item in store_items:
+			# 			cur_score = self.bert_model.getTextSim(_word, _item)
+			# 			ave_score.append(cur_score) 
+			# 		store_scores[_store].append(np.mean(ave_score)) 
+			# for _ in store_scores: 
+			# 	print(_, store_scores[_]) 
+			# 	store_scores[_] = np.mean(store_scores[_]) 
 			return_lis = [] 
 			for _ in store_scores: 
 				return_lis.append((_, store_scores[_])) 
@@ -185,7 +206,10 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	# 返回的是 [store_name, 分数] (综合推荐商店)
 	# 这个要综合上 preference 那个 
 	def recommend_store(self, user_infos, store_list): 
-		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id']) 
+
+		# print(self.get_user_item_preference_number(user_infos)) 
+
 		if not os.path.exists(user_storage_path):
 			# 没有用户信息，那就随机推荐就行 
 			return_lis = [] 
@@ -229,7 +253,8 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	# 		with open(user_comment_path, 'w') as f: 
 	# 			json.dump([{"user_info": user_infos, "store_info": store_infos, "score": rec_score}], f)
 
-	# 可一个更新商店的信息
+
+	# 可一个更新商店的信息 
 	# 可覆盖 
 	def update_store_info(self, store_info): 
 		store_storage_path = os.path.join(self.STORE_STORAGE_PATH, store_info['store_name']) 
@@ -244,17 +269,6 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		if os.path.exists(store_storage_path): 
 			# 此时会更新对于这个商铺的偏好 
 			store_storage_file = os.path.join(store_storage_path, 'store_info.json')   
-			with open(store_storage_file, 'r') as f: 
-				store_data = json.load(f) 
-
-			if 'score' in store_data: 
-				store_data['score'].append(score) 
-			else: 
-				store_data['score'] = [score]
-			
-			with open(store_storage_file, 'w') as f: 
-				json.dump(store_data, f) 
-
 			with open(store_storage_file, 'r') as f: 
 				store_items = json.load(f)['store_item'] 
 			user_preference = [] 
@@ -329,79 +343,140 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 # 用户反馈   
 
 # python rec_code_embedding.py 
-if __name__ == '__main__':  
+
+# [['12584', 4.0], ['25455', 9.0], ['34506', 5.666666666666667]]  
+def test_example_3(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
 		storage_path = 'datas/storage/user', 
 		device = 'cuda:0', 
 		embdding_storage_path = 'data/storage/embeddings', 
 		classifier_name = 'decision_tree'
-	)  
-
-	# 初期：会只根据几个关键词来对用户进行建模 
-	rec_store.update_user_preference_tag(
-		{"user_id": "00121"}, 
-		['apple', 'fruit', 'bannana', 'oranage', 'food'] 
-	)  
-	# rec_store.update_user_item_preference(
-	# 	{"user_id": "00121"}, 
-	# 	[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
-	# )
-	# rec_store.update_user_item_preference(
-	# 	{"user_id": "00121"}, 
-	# 	[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
-	# )  
-
-
-	# 存储商店信息
-	rec_store.update_store_info(
-		{
-			"store_name": "store-1", 
-			"store_item": ['apple', 'grape', 'juice', 'milk'] 
-		}
 	)
-	rec_store.update_store_info(
-		{
-			"store_name": "store-2", 
-			"store_item": ['car', 'bycicle', 'pants', 'soccer'] 
-		}
-	)
-	rec_store.update_store_info(
-		{
-			"store_name": "store-3", 
-			"store_item": ['dvd', 'mp3', 'ipad', 'computer'] 
-		}
-	)
+
+	# 测试样例 3 通过 
+	path_f2s = [
+        'utils/test_files/Functional-Test/3/F2S-0.json' , 
+        'utils/test_files/Functional-Test/3/F2S-1.json' , 
+        'utils/test_files/Functional-Test/3/F2S-2.json' , 
+        'utils/test_files/Functional-Test/3/F2S-3.json' , 
+    ]
+	path_stores = [
+		'utils/test_files/Functional-Test/3/S.json'
+	]
+	path_user = [
+		'utils/test_files/Functional-Test/3/UwoIn.json'
+	]
+	for i in range(len(path_f2s)): 
+		data = get_feedback_to_store(path_f2s[i]) 
+		store_info  = data[0] 
+		user_info   = data[1] 
+		rating_info = data[2] 
+		rec_store.update_store_info(
+			store_info
+		)
+		rec_store.update_user_store_preference(
+			user_info, store_info['store_name'], rating_info
+		)
 	
-	# 存储每个用户对于商店中商品的偏好 
-	# rec_store.update_user_store_preference({"user_id": "00121"}, "store-1", 7)
-	# rec_store.update_user_store_preference({"user_id": "00121"}, "store-2", 3)
-	# rec_store.update_user_store_preference({"user_id": "00121"}, "store-3", 4)   
+	store_query_list = get_store_information(path_stores[0]) 
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	user_info_query  = get_user_information(path_user[0]) 
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+	sys.exit(0) 
+
+def test_example_2(): 
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	)
+	path_stores = [
+		'utils/test_files/Functional-Test/2/S.json'
+	]
+	path_user = [
+		'utils/test_files/Functional-Test/2/UwoIn.json'
+	]
+	
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	sys.exit(0) 
+	# print(store_query_list) 
+	user_info_query  = get_user_information(path_user[0]) 
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+	sys.exit(0) 
+if __name__ == '__main__':  
+	test_example_2() 
+	# test_example_3() 
+	# # 初期：会只根据几个关键词来对用户进行建模 
+	# rec_store.update_user_preference_tag(
+	# 	{"user_id": "00121"}, 
+	# 	['apple', 'fruit', 'bannana', 'oranage', 'food'] 
+	# )  
+	# # rec_store.update_user_item_preference(
+	# # 	{"user_id": "00121"}, 
+	# # 	[("apple", 8), ("orange", 8), ("juice", 3), ("car", 2), ("grape", 9)] 
+	# # )
+	# # rec_store.update_user_item_preference(
+	# # 	{"user_id": "00121"}, 
+	# # 	[("computer", 2), ("apple", 8), ("bycicle", 3), ("car", 2), ("grape", 9)] 
+	# # )  
 
 
-	# 新来了两个店铺 
+	# # 存储商店信息
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-1", 
+	# 		"store_item": ['apple', 'grape', 'juice', 'milk'] 
+	# 	}
+	# )
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-2", 
+	# 		"store_item": ['car', 'bycicle', 'pants', 'soccer'] 
+	# 	}
+	# )
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-3", 
+	# 		"store_item": ['dvd', 'mp3', 'ipad', 'computer'] 
+	# 	}
+	# )
+	
+	# # 存储每个用户对于商店中商品的偏好 
+	# # rec_store.update_user_store_preference({"user_id": "00121"}, "store-1", 7)
+	# # rec_store.update_user_store_preference({"user_id": "00121"}, "store-2", 3)
+	# # rec_store.update_user_store_preference({"user_id": "00121"}, "store-3", 4)   
+
+
+	# # 新来了两个店铺 
  
- 	# ['apple', 'fruit', 'bannana', 'oranage', 'food'] 
-	rec_store.update_store_info(
-		{
-			"store_name": "store-4", 
-			"store_item": ['pen', 'paper', 'boat', 'ink', 'dress'] 
-		}
-	)
-	rec_store.update_store_info(
-		{
-			"store_name": "store-5", 
-			"store_item": ['uniform', 'wardrobe', 'clothing', 'overalls', 'tailcoat'] 
-		}
-	)
-	rec_store.update_store_info(
-		{
-			"store_name": "store-6", 
-			"store_item": ['fruit', 'cherry', 'peach', 'lime', 'papaya'] 
-		}
-	)
-	rec_result = rec_store.recommend_store(
-		{"user_id": "00121"}, ["store-4", "store-5", "store-6"] 
-	)
-	print(rec_result) 
+ 	# # ['apple', 'fruit', 'bannana', 'oranage', 'food'] 
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-4", 
+	# 		"store_item": ['pen', 'paper', 'boat', 'ink', 'dress'] 
+	# 	}
+	# )
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-5", 
+	# 		"store_item": ['uniform', 'wardrobe', 'clothing', 'overalls', 'tailcoat'] 
+	# 	}
+	# )
+	# rec_store.update_store_info(
+	# 	{
+	# 		"store_name": "store-6", 
+	# 		"store_item": ['fruit', 'cherry', 'peach', 'lime', 'papaya'] 
+	# 	}
+	# )
+	# rec_result = rec_store.recommend_store(
+	# 	{"user_id": "00121"}, ["store-4", "store-5", "store-6"] 
+	# )
+	# print(rec_result) 
+	
 	# [['store-4', 6.0], ['store-5', 4.0]] 	
+	# python rec_code_embedding.py 
 	# python rec_code_embedding.py 

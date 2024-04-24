@@ -1,0 +1,149 @@
+{
+    "InterfaceId": 13,
+    "CurrentUser": "12345",
+    "Stores": [
+        {
+            "storeId": 12584,
+            "storeName": "Fresh Mart",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.0060,
+                "address": "123 Main Street, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Apples",
+                    "category": "Fruits",
+                    "price": 1.99,
+                    "quantity": 100
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Bread",
+                    "category": "Bakery",
+                    "price": 2.49,
+                    "quantity": 50
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Milk",
+                    "category": "Dairy",
+                    "price": 3.29,
+                    "quantity": 30
+                }
+            ],
+            "storeDescription": "Fresh Mart offers a wide selection of fresh produce, bakery items, and dairy products."
+        },
+        {
+            "storeId": 25455,
+            "storeName": "Tech Haven",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Main Street, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Laptop",
+                    "brand": "Apple",
+                    "price": 1500,
+                    "description": "The latest MacBook Pro with M1 chip.",
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Smartphone",
+                    "brand": "Samsung",
+                    "price": 1000,
+                    "description": "Samsung Galaxy S21 Ultra with 5G capabilities.",
+                    "quantityAvailable": 15
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Headphones",
+                    "brand": "Sony",
+                    "price": 300,
+                    "description": "Sony WH-1000XM4 Wireless Noise-Canceling Headphones.",
+                    "quantityAvailable": 20
+                }
+            ],
+            "storeDescription": "Tech Haven is your one-stop shop for the latest and greatest in technology. From laptops to smartphones and accessories, we've got you covered with top brands and competitive prices."
+        },
+        {
+            "storeId": 79553,
+            "storeName": "Antique Treasures",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.0060,
+                "address": "123 Main Street, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Qing Dynasty Vase",
+                    "description": "A beautifully crafted porcelain vase from the Qing Dynasty period, featuring intricate designs and vibrant colors.",
+                    "price": 5000
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Victorian Era Pocket Watch",
+                    "description": "An exquisite pocket watch from the Victorian era, adorned with ornate engravings and still in working condition.",
+                    "price": 1500
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Ancient Greek Amphora",
+                    "description": "An authentic amphora from ancient Greece, showcasing the artistic prowess of the Hellenistic period.",
+                    "price": 8000
+                }
+            ],
+            "StoreDescription": "Antique Treasures specializes in rare and valuable artifacts from various historical periods, offering discerning collectors the opportunity to acquire unique pieces of history."
+        },
+        {
+            "storeId": 34506,
+            "storeName": "FoodieMart",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Main Street, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Organic Apples",
+                    "category": "Fruits",
+                    "price": 2.99,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Grass-fed Beef",
+                    "category": "Meat",
+                    "price": 9.99,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Freshly Baked Baguette",
+                    "category": "Bread",
+                    "price": 3.49,
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "FoodieMart is your one-stop shop for fresh, high-quality groceries. We specialize in organic produce, grass-fed meats, and artisanal breads."
+        }
+    ],
+    "Location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "country": "United States",
+        "state": "New York",
+        "city": "New York City",
+        "street": "Broadway",
+        "number": "123",
+        "floor": "5th",
+        "zipcode": "10001"
+    }
+}

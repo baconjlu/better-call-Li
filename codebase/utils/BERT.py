@@ -17,7 +17,7 @@ class Bert():
         embedding = output.last_hidden_state.mean(dim=1)
         return embedding
     
-    def getTextSim(self, text1, text2, threshold = 0.5):
+    def getTextSim(self, text1, text2):
         encoding1 = self.tokenizer(text1, return_tensors='pt', max_length=512, truncation=True)
         encoding2 = self.tokenizer(text2, return_tensors='pt', max_length=512, truncation=True)
         encoding1.to(self.device) 
@@ -28,7 +28,7 @@ class Bert():
         # print(output1.last_hidden_state.mean(dim=1))
         cosine_sim = torch.nn.functional.cosine_similarity(output1.last_hidden_state.mean(dim=1),
                                                            output2.last_hidden_state.mean(dim=1))
-        return cosine_sim.item() > threshold, cosine_sim.item()
+        return cosine_sim.item()
     
     def getEmbSim(self, emb1, emb2, threshold = 0.5):
         emb1 = torch.tensor(emb1)

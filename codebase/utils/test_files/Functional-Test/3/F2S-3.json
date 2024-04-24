@@ -1,0 +1,168 @@
+{
+  "InterfaceId": 22,
+  "CurrentUser": "12345",
+  "Feedback": {
+    "Item": {
+      "storeId": 3,
+      "storeName": "Fresh Mart",
+      "location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "address": "123 Main St, Anytown, USA"
+      },
+      "items": [
+        {
+          "itemId": 123,
+          "itemName": "Apples",
+          "itemCategory": "Fruit",
+          "itemPrice": 0.99,
+          "itemDescription": "Crisp and juicy apples sourced from local orchards."
+        },
+        {
+          "itemId": 124,
+          "itemName": "Bread",
+          "itemCategory": "Bakery",
+          "itemPrice": 2.49,
+          "itemDescription": "Freshly baked bread made with premium ingredients."
+        },
+        {
+          "itemId": 125,
+          "itemName": "Milk",
+          "itemCategory": "Dairy",
+          "itemPrice": 3.99,
+          "itemDescription": "Rich and creamy milk, straight from the farm."
+        },
+        {
+          "itemId": 126,
+          "itemName": "Bananas",
+          "itemCategory": "Fruit",
+          "itemPrice": 1.29,
+          "itemDescription": "Naturally sweet bananas, perfect for snacking."
+        },
+        {
+          "itemId": 127,
+          "itemName": "Eggs",
+          "itemCategory": "Dairy",
+          "itemPrice": 2.99,
+          "itemDescription": "Farm-fresh eggs, ideal for breakfast or baking."
+        },
+        {
+          "itemId": 128,
+          "itemName": "Tomatoes",
+          "itemCategory": "Produce",
+          "itemPrice": 1.79,
+          "itemDescription": "Vine-ripened tomatoes bursting with flavor."
+        },
+        {
+          "itemId": 129,
+          "itemName": "Chicken Breast",
+          "itemCategory": "Meat",
+          "itemPrice": 5.49,
+          "itemDescription": "Lean and tender chicken breast, perfect for grilling or roasting."
+        },
+        {
+          "itemId": 130,
+          "itemName": "Oranges",
+          "itemCategory": "Fruit",
+          "itemPrice": 1.99,
+          "itemDescription": "Refreshing oranges packed with vitamin C."
+        },
+        {
+          "itemId": 131,
+          "itemName": "Butter",
+          "itemCategory": "Dairy",
+          "itemPrice": 2.79,
+          "itemDescription": "Creamy butter for cooking, baking, or spreading."
+        },
+        {
+          "itemId": 132,
+          "itemName": "Salmon Fillet",
+          "itemCategory": "Seafood",
+          "itemPrice": 8.99,
+          "itemDescription": "Fresh, sustainably sourced salmon fillet, rich in omega-3 fatty acids."
+        },
+        {
+          "itemId": 133,
+          "itemName": "Potatoes",
+          "itemCategory": "Produce",
+          "itemPrice": 2.19,
+          "itemDescription": "Versatile potatoes suitable for roasting, mashing, or frying."
+        },
+        {
+          "itemId": 134,
+          "itemName": "Spinach",
+          "itemCategory": "Produce",
+          "itemPrice": 2.69,
+          "itemDescription": "Nutrient-packed spinach, great for salads, smoothies, or sautés."
+        },
+        {
+          "itemId": 135,
+          "itemName": "Yogurt",
+          "itemCategory": "Dairy",
+          "itemPrice": 1.89,
+          "itemDescription": "Creamy yogurt available in various flavors, perfect for breakfast or snacks."
+        },
+        {
+          "itemId": 136,
+          "itemName": "Carrots",
+          "itemCategory": "Produce",
+          "itemPrice": 1.49,
+          "itemDescription": "Sweet and crunchy carrots, excellent for snacking or cooking."
+        },
+        {
+          "itemId": 137,
+          "itemName": "Ground Beef",
+          "itemCategory": "Meat",
+          "itemPrice": 4.99,
+          "itemDescription": "High-quality ground beef, ideal for burgers, meatballs, or tacos."
+        },
+        {
+          "itemId": 138,
+          "itemName": "Cheese",
+          "itemCategory": "Dairy",
+          "itemPrice": 3.49,
+          "itemDescription": "Assorted cheeses, perfect for charcuterie boards or sandwiches."
+        },
+        {
+          "itemId": 139,
+          "itemName": "Lettuce",
+          "itemCategory": "Produce",
+          "itemPrice": 1.29,
+          "itemDescription": "Fresh lettuce varieties, great for salads, wraps, or sandwiches."
+        },
+        {
+          "itemId": 140,
+          "itemName": "Pasta",
+          "itemCategory": "Pantry",
+          "itemPrice": 1.99,
+          "itemDescription": "Assorted pasta shapes, ideal for a variety of pasta dishes."
+        },
+        {
+          "itemId": 141,
+          "itemName": "Olive Oil",
+          "itemCategory": "Pantry",
+          "itemPrice": 5.79,
+          "itemDescription": "Extra virgin olive oil, perfect for cooking, dressing salads, or dipping bread."
+        },
+        {
+          "itemId": 142,
+          "itemName": "Rice",
+          "itemCategory": "Pantry",
+          "itemPrice": 3.29,
+          "itemDescription": "Long-grain rice suitable for pilafs, stir-fries, or side dishes."
+        },
+        {
+          "itemId": 143,
+          "itemName": "Cereal",
+          "itemCategory": "Pantry",
+          "itemPrice": 4.49,
+          "itemDescription": "Assorted breakfast cereals for a quick and nutritious morning meal."
+        }
+    ],
+      "storeDescription": "Your local grocery store providing fresh produce and goods."
+    },
+    "comment": "I am highly disappointed with the quality of the products. Most of them were past their expiration dates or inedible.",
+    "rating": 4,
+    "UserId": "12345"
+  }
+}
