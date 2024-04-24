@@ -14,6 +14,8 @@ class LLAMA():
             self.rec_with_interest_prompt = file.read()
         with open(os.path.join(prompt_path, 'rec_with_item.txt'), 'r') as file:
             self.rec_with_item_prompt = file.read()
+        with open(os.path.join(prompt_path, 'report.txt'), 'r') as file:
+            self.report_prompt = file.read()
             
         print('LLAMA initialized')
          
@@ -63,6 +65,11 @@ class LLAMA():
                 interest_prodects.append(item)
         return interest_prodects
     
+    def get_report(self, pos_item_list, neg_item_list):
+        prompt = self.report_prompt.replace("{{Pos}}", str(pos_item_list)).replace("{{Neg}}", str(neg_item_list))
+        replys = self.ask([prompt])
+        return replys[0]
+
     def ask(self, prompts):
         '''
         input a list of prompts, output a list of reply
@@ -111,4 +118,15 @@ if __name__ == '__main__':
     print("Item-Rec time:", round(time.time() - start_time, 2), "seconds")
     print(rec_list)
     # ['Baking Soda', 'Ice Cream', 'Butter', 'Peanut Butter']
+
+    # User-Report Demo
     
+    pos_list = ["Laptop", "Ice Cream", "Coffee", "Tea", "Peanut Butter", "Jelly"]
+    neg_list = ["Orange Juice", "Cereal", "Pasta", "Rice"]
+    start_time = time.time()
+    report = llama.get_report(pos_list, neg_list)
+    print("Item-Rec time:", round(time.time() - start_time, 2), "seconds")
+    print(report)
+    # Based on your shopping history, it appears you have a strong interest in technology, particularly laptops, which suggests a need or desire for a reliable and efficient device for work or personal use. Your interest in ice cream, coffee, and tea also indicates a taste for indulgent treats and a preference for caffeinated beverages. Additionally, your purchases of peanut butter and jelly suggest a love for spreads and a desire for quick and easy snacks.
+    # On the other hand, your dislikes reveal a lack of interest in certain food items, such as orange juice and cereal, which may suggest a preference for more natural or less processed foods. Additionally, your dislike of pasta and rice may indicate a desire for more diverse and varied meals, rather than relying on a limited range of carbohydrate-based options.
+    # In summary, your shopping habits suggest a focus on technology, indulgent treats, and a desire for quick and easy meals, while also indicating a preference for more natural and less processed foods. You tend to steer clear of certain carbohydrate-based options, such as pasta and rice, in favor of more diverse and varied meals.
