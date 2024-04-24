@@ -98,8 +98,11 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	
 	# 一个用户的偏好清单
 	def update_user_preference_tag(self, user_infos, preference_tag): 
+		if len(preference_tag) == 0: 
+			return 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
-		user_preference_tag_path = os.path.join(user_storage_path, 'preference_tag.json')
+		user_preference_tag_path = os.path.join(user_storage_path, 'preference_tag.json')  
+		print(user_preference_tag_path) 
 		if not os.path.exists(user_storage_path):
 			os.makedirs(user_storage_path)  
 			with open(user_preference_tag_path, 'w') as f: 
@@ -109,7 +112,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				current_data = json.load(f)  
 			current_data['tag'] += preference_tag  
 			# 去重 
-			current_data['tag'] = set(current_data['tag'])
+			current_data['tag'] = list(set(current_data['tag']))
 			with open(user_preference_tag_path, 'w') as f: 
 				json.dump(current_data, f) 
 
@@ -165,7 +168,6 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			# 			ave_score.append(cur_score) 
 			# 		store_scores[_store].append(np.mean(ave_score)) 
 			# for _ in store_scores: 
-			# 	print(_, store_scores[_]) 
 			# 	store_scores[_] = np.mean(store_scores[_]) 
 			return_lis = [] 
 			for _ in store_scores: 
@@ -343,8 +345,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 # 用户反馈   
 
 # python rec_code_embedding.py 
-
-# [['12584', 4.0], ['25455', 9.0], ['34506', 5.666666666666667]]  
+# [['12584', 4.0], ['25455', 9.0], ['34506', 5.666666666666667]]    
 def test_example_3(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
 		storage_path = 'datas/storage/user', 
@@ -385,6 +386,10 @@ def test_example_3():
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
 	sys.exit(0) 
 
+# BERT initialized
+# datas/storage/user/12345/preference_tag.json
+# [('12584', 0.8468737900257111), ('25455', 0.8430418074131012), ('79553', 0.7953134179115295), ('34506', 0.8210707008838654)]
+
 def test_example_2(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
 		storage_path = 'datas/storage/user', 
@@ -396,20 +401,49 @@ def test_example_2():
 		'utils/test_files/Functional-Test/2/S.json'
 	]
 	path_user = [
-		'utils/test_files/Functional-Test/2/UwoIn.json'
+		'utils/test_files/Functional-Test/2/UwIn.json'
 	]
 	
 	store_query_list = get_store_information(path_stores[0])      
 	for _ in store_query_list: 
 		rec_store.update_store_info(_)
-	sys.exit(0) 
 	# print(store_query_list) 
-	user_info_query  = get_user_information(path_user[0]) 
+	user_info_query  = get_user_information(path_user[0])    
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+	sys.exit(0) 
+
+# BERT initialized
+# [('12584', 0), ('25455', 0), ('34506', 0)]
+def test_example_1(): 
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	)
+	path_stores = [
+		'utils/test_files/Functional-Test/1/S.json'
+	]
+	path_user = [
+		'utils/test_files/Functional-Test/1/UwoIn.json'
+	]
+	
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	# print(store_query_list) 
+	user_info_query  = get_user_information(path_user[0])    
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
 	sys.exit(0) 
 if __name__ == '__main__':  
+	# test_example_1() 
 	test_example_2() 
 	# test_example_3() 
+ 
 	# # 初期：会只根据几个关键词来对用户进行建模 
 	# rec_store.update_user_preference_tag(
 	# 	{"user_id": "00121"}, 

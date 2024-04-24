@@ -49,7 +49,7 @@
                     "itemName": "Laptop",
                     "brand": "Apple",
                     "price": 1500,
-                    "category": "Fruits",
+                    "category": "computer",
                     "description": "The latest MacBook Pro with M1 chip.",
                     "quantityAvailable": 10
                 },
@@ -58,7 +58,7 @@
                     "itemName": "Smartphone",
                     "brand": "Samsung",
                     "price": 1000,
-                    "category": "electronic",
+                    "category": "phone",
                     "description": "Samsung Galaxy S21 Ultra with 5G capabilities.",
                     "quantityAvailable": 15
                 },
@@ -67,7 +67,7 @@
                     "itemName": "Headphones",
                     "brand": "Sony",
                     "price": 300,
-                    "category": "electronic",
+                    "category": "earphone",
                     "description": "Sony WH-1000XM4 Wireless Noise-Canceling Headphones.",
                     "quantityAvailable": 20
                 }

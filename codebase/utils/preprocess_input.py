@@ -40,7 +40,9 @@ def get_store_information(path):
 def get_user_information(path): 
     with open(path, 'r') as f: 
         origin_data = json.load(f) 
-    return {"user_id": str(origin_data["UserData"]["UserId"])}
+    user_interest = origin_data["UserData"]["Interests"] 
+    user_interest = [str(_).lower() for _ in user_interest] 
+    return {"user_id": str(origin_data["UserData"]["UserId"]), "user_preference": user_interest} 
 
 if __name__ == '__main__': 
     # path = 'test_files/Functional-Test/3/.json' 

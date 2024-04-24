@@ -48,6 +48,7 @@
                     "itemId": 1,
                     "itemName": "Laptop",
                     "brand": "Apple",
+                    "category": "computer", 
                     "price": 1500,
                     "description": "The latest MacBook Pro with M1 chip.",
                     "quantityAvailable": 10
@@ -56,6 +57,7 @@
                     "itemId": 2,
                     "itemName": "Smartphone",
                     "brand": "Samsung",
+                    "category": "phone", 
                     "price": 1000,
                     "description": "Samsung Galaxy S21 Ultra with 5G capabilities.",
                     "quantityAvailable": 15
@@ -64,42 +66,13 @@
                     "itemId": 3,
                     "itemName": "Headphones",
                     "brand": "Sony",
+                    "category": "headphone", 
                     "price": 300,
                     "description": "Sony WH-1000XM4 Wireless Noise-Canceling Headphones.",
                     "quantityAvailable": 20
                 }
             ],
             "storeDescription": "Tech Haven is your one-stop shop for the latest and greatest in technology. From laptops to smartphones and accessories, we've got you covered with top brands and competitive prices."
-        },
-        {
-            "storeId": 79553,
-            "storeName": "Antique Treasures",
-            "location": {
-                "latitude": 40.7128,
-                "longitude": -74.0060,
-                "address": "123 Main Street, New York, NY"
-            },
-            "items": [
-                {
-                    "itemId": 1,
-                    "itemName": "Qing Dynasty Vase",
-                    "description": "A beautifully crafted porcelain vase from the Qing Dynasty period, featuring intricate designs and vibrant colors.",
-                    "price": 5000
-                },
-                {
-                    "itemId": 2,
-                    "itemName": "Victorian Era Pocket Watch",
-                    "description": "An exquisite pocket watch from the Victorian era, adorned with ornate engravings and still in working condition.",
-                    "price": 1500
-                },
-                {
-                    "itemId": 3,
-                    "itemName": "Ancient Greek Amphora",
-                    "description": "An authentic amphora from ancient Greece, showcasing the artistic prowess of the Hellenistic period.",
-                    "price": 8000
-                }
-            ],
-            "StoreDescription": "Antique Treasures specializes in rare and valuable artifacts from various historical periods, offering discerning collectors the opportunity to acquire unique pieces of history."
         },
         {
             "storeId": 34506,
