@@ -452,6 +452,8 @@ def test_example_3(llama):
 	print(report)
 	sys.exit(0) 
 
+
+
 # BERT initialized
 # datas/storage/user/12345/preference_tag.json
 # [('12584', 0.8468737900257111), ('25455', 0.8430418074131012), ('79553', 0.7953134179115295), ('34506', 0.8210707008838654)]
