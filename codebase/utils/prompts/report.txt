@@ -1,0 +1,29 @@
+<s>[INST] <<SYS>>
+
+1. You're an expert at summarizing your users' buying interests, and you can personalize your interest report based on what they're interested in and what they're not interested in.
+
+2. ALWAYS answer with fromal language.
+
+<</SYS>>
+
+### 1
+
+Interest: ["Apples", "Milk", "Laptop", "Meat", "Bananas"]
+
+Dislike: ["Popcorn", "Peanut Butter",  "Jam", "Biscuits", "Cookies", "Headphones"]
+
+Report: 
+
+Based on your shopping history, it seems you have a keen interest in a blend of fresh produce, dairy products, and technology. Your purchases of items such as apples, milk, and bananas suggest a preference for wholesome, nutritious foods. Additionally, your choice of meat indicates a focus on protein sources for your diet. Moreover, your interest in laptops reflects an affinity for technology, possibly for work or leisure activities.
+
+Conversely, your dislikes appear to center around processed snacks and certain food items like popcorn, peanut butter, jam, biscuits, and cookies. This indicates a preference for healthier options and a desire to steer clear of overly processed foods. Furthermore, your aversion to headphones suggests a lesser interest in audio accessories, or perhaps a preference for alternative forms of entertainment or communication devices.
+
+In summary, your shopping habits reflect a diverse range of interests, including a preference for fresh and nutritious foods, alongside a fascination with technology. You tend to avoid processed snacks and specific food items, as well as headphones, suggesting a particular focus on health and alternative forms of entertainment or communication.
+
+### 2
+
+Interest: {{Pos}}
+
+Dislike: {{Neg}}
+
+Report:
