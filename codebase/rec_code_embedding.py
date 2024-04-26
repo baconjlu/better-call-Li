@@ -1,3 +1,4 @@
+import time 
 import sys 
 import numpy as np 
 import pandas as pd  
@@ -7,10 +8,17 @@ import json
 from tqdm import tqdm 
 from utils.BERT import Bert 
 from collections import defaultdict  
+import shutil 
 from sklearn.tree import DecisionTreeClassifier
 import pickle 
 from utils.preprocess_input import get_feedback_to_store, get_store_information, get_user_information
-MLTHRESHOLD = 30 
+from utils.preprocess_input import get_feedback_to_item
+
+# 设计一个新策略：如果 feedback 的 > 7，则算法 preference 
+
+# 
+MLTHRESHOLD = 30
+LIKE_LIMIT = 7 
 class USER_RECOMMENDATION_SYSTEM:
 	def __init__(self, 
 		storage_path = 'datas/storage/user',
@@ -108,9 +116,13 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			with open(user_preference_tag_path, 'w') as f: 
 				json.dump({'tag': preference_tag}, f) 
 		else: 
-			with open(user_preference_tag_path, 'r') as f: 
-				current_data = json.load(f)  
-			current_data['tag'] += preference_tag  
+			if os.path.exists(user_preference_tag_path):
+				with open(user_preference_tag_path, 'r') as f: 
+					current_data = json.load(f)  
+				current_data['tag'] += preference_tag  
+			else: 
+				current_data = {} 
+				current_data['tag'] = preference_tag
 			# 去重 
 			current_data['tag'] = list(set(current_data['tag']))
 			with open(user_preference_tag_path, 'w') as f: 
@@ -210,8 +222,11 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 	def recommend_store(self, user_infos, store_list): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id']) 
 
-		# print(self.get_user_item_preference_number(user_infos)) 
+		print(self.get_user_item_preference_number(user_infos), MLTHRESHOLD)
 
+
+		# print(self.get_user_item_preference_number(user_infos)) 
+		# print(self.get_user_item_preference_number(user_infos))
 		if not os.path.exists(user_storage_path):
 			# 没有用户信息，那就随机推荐就行 
 			return_lis = [] 
@@ -278,6 +293,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 				user_preference.append((_item, score)) 
 			self.update_user_item_preference(user_infos, user_preference) 
 
+				
 	def get_user_item_preference_number(self, user_infos): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')        
@@ -286,12 +302,29 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 		else: 
 			with open(user_comment_path, 'r') as f: 
 				return len(json.load(f)) 
-			
+	
+	def get_user_item_preference(self, user_infos): 
+		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])   
+		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')   
+		if os.path.exists(user_comment_path):      
+			with open(user_comment_path, 'r') as f: 
+				data = json.load(f)  
+			for _ in data: 
+				data[_] = np.mean(data[_])   
+			return data 
+		else: 
+			return None 
+
+
 	def update_user_item_preference(self, user_infos, user_preference):  
+		# update_user_preference_tag 
+
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])    
 		if not os.path.exists(user_storage_path):
 			os.makedirs(user_storage_path)  
 		user_comment_path = os.path.join(user_storage_path, 'item_preference.json')     
+
+		# user_all_preferences = None 
 		if os.path.exists(user_comment_path): 
 			with open(user_comment_path, 'r') as f: 
 				origin_data = json.load(f)    
@@ -300,6 +333,7 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 					origin_data[_[0]].append(_[1])
 				else: 
 					origin_data[_[0]] = [_[1]] 
+			# user_all_preferences = origin_data
 			with open(user_comment_path, 'w') as f: 
 				json.dump(origin_data, f)  
 			# print(f'1-1: {new_data}')
@@ -307,10 +341,17 @@ class STORE_RECOMMENDATION_SYSTEM(USER_RECOMMENDATION_SYSTEM):
 			item_score_dict = defaultdict(list)  
 			for _ in user_preference: 
 				item_score_dict[_[0]].append(_[1]) 
+			# user_all_preferences = item_score_dict
 			with open(user_comment_path, 'w') as f:    
-				json.dump(item_score_dict, f)   
+				json.dump(item_score_dict, f)    
+		pref_list = []
+		for _ in user_preference: 
+			if _[1] >= LIKE_LIMIT: 
+				pref_list.append(_[0]) 
+		self.update_user_preference_tag(user_infos, pref_list) 
 		self.flush_user_preference(user_infos)
 	
+
 	def classify_user_preference(self, user_infos, _item): 
 		user_storage_path  = os.path.join(self.STORAGE_PATH, user_infos['user_id'])   
 		user_classifier_path = os.path.join(user_storage_path, 'classifier.pkl')    
@@ -384,11 +425,10 @@ def test_example_3():
 		rec_store.update_store_info(_)
 	user_info_query  = get_user_information(path_user[0]) 
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+	print(rec_store.get_user_item_preference(user_info_query) )
 	sys.exit(0) 
 
-# BERT initialized
-# datas/storage/user/12345/preference_tag.json
-# [('12584', 0.8468737900257111), ('25455', 0.8430418074131012), ('79553', 0.7953134179115295), ('34506', 0.8210707008838654)]
+
 
 def test_example_2(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
@@ -404,18 +444,21 @@ def test_example_2():
 		'utils/test_files/Functional-Test/2/UwIn.json'
 	]
 	
-	store_query_list = get_store_information(path_stores[0])      
-	for _ in store_query_list: 
-		rec_store.update_store_info(_)
-	# print(store_query_list) 
+	
+	# 收到 user 并保存
 	user_info_query  = get_user_information(path_user[0])    
 	if 'user_preference' in user_info_query: 
 		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+
+	# 给每个商店打分 
+ 	# 收到 store 并接受 
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
 	sys.exit(0) 
 
-# BERT initialized
-# [('12584', 0), ('25455', 0), ('34506', 0)]
+
 def test_example_1(): 
 	rec_store = STORE_RECOMMENDATION_SYSTEM(
 		storage_path = 'datas/storage/user', 
@@ -423,6 +466,7 @@ def test_example_1():
 		embdding_storage_path = 'data/storage/embeddings', 
 		classifier_name = 'decision_tree'
 	)
+
 	path_stores = [
 		'utils/test_files/Functional-Test/1/S.json'
 	]
@@ -430,19 +474,185 @@ def test_example_1():
 		'utils/test_files/Functional-Test/1/UwoIn.json'
 	]
 	
-	store_query_list = get_store_information(path_stores[0])      
-	for _ in store_query_list: 
-		rec_store.update_store_info(_)
-	# print(store_query_list) 
+	
+
 	user_info_query  = get_user_information(path_user[0])    
 	if 'user_preference' in user_info_query: 
 		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
 	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
 	sys.exit(0) 
+
+def test_example_4(): 
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	) 
+	path_f2i = [
+		'utils/test_files/Functional-Test/4/F2I.json' 
+	]
+	for _ in path_f2i: 
+		data = get_feedback_to_item(_) 
+		for _user in data: 
+			rec_store.update_user_item_preference(
+				{"user_id": _user}, data[_user] 
+			)
+	path_stores = [
+		'utils/test_files/Functional-Test/1/S.json'
+	]
+	path_user = [
+		'utils/test_files/Functional-Test/1/UwoIn.json'
+	]
+
+	
+	user_info_query  = get_user_information(path_user[0])        
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+	
+
+	print(user_info_query) 
+
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))
+	sys.exit(0) 
+
+def test_example_5(): 
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	) 
+	path_f2i = [
+		'utils/test_files/Functional-Test/5/F2I.json' 
+	]
+	for _ in path_f2i: 
+		data = get_feedback_to_item(_) 
+		for _user in data: 
+			rec_store.update_user_item_preference(
+				{"user_id": _user}, data[_user] 
+			)
+	path_f2s = [
+        'utils/test_files/Functional-Test/5/F2S-0.json' , 
+        'utils/test_files/Functional-Test/5/F2S-1.json' , 
+        'utils/test_files/Functional-Test/5/F2S-2.json' , 
+        'utils/test_files/Functional-Test/5/F2S-3.json' , 
+    ]
+	for i in range(len(path_f2s)): 
+		data = get_feedback_to_store(path_f2s[i]) 
+		store_info  = data[0] 
+		user_info   = data[1] 
+		rating_info = data[2] 
+		rec_store.update_store_info(
+			store_info
+		)
+		rec_store.update_user_store_preference(
+			user_info, store_info['store_name'], rating_info
+		)
+	
+	
+	path_stores = [
+		'utils/test_files/Functional-Test/5/S.json'
+	]
+	path_user = [
+		'utils/test_files/Functional-Test/5/UwIn.json'
+	]
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	user_info_query  = get_user_information(path_user[0])        
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+
+	print(user_info_query) 
+
+	t1 = time.time() 
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))  
+
+
+def test_pressure(): 
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'data/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	) 
+	path_f2i = [
+		'utils/test_files/Performance-Test/1/F2I.json' 
+	]
+	for _ in path_f2i: 
+		data = get_feedback_to_item(_) 
+		for _user in data: 
+			rec_store.update_user_item_preference(
+				{"user_id": _user}, data[_user] 
+			)
+	path_f2s = [
+        'utils/test_files/Performance-Test/1/F2S-0.json' , 
+        'utils/test_files/Performance-Test/1/F2S-1.json' , 
+        'utils/test_files/Performance-Test/1/F2S-2.json' , 
+        'utils/test_files/Performance-Test/1/F2S-3.json' , 
+    ]
+	for i in range(len(path_f2s)): 
+		data = get_feedback_to_store(path_f2s[i]) 
+		store_info  = data[0] 
+		user_info   = data[1] 
+		rating_info = data[2] 
+		rec_store.update_store_info(
+			store_info
+		)
+		rec_store.update_user_store_preference(
+			user_info, store_info['store_name'], rating_info
+		)
+	
+	
+	path_stores = [
+		'utils/test_files/Performance-Test/1/S.json'
+	]
+	path_user = [
+		'utils/test_files/Performance-Test/1/UwIn.json'
+	]
+	store_query_list = get_store_information(path_stores[0])      
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	user_info_query  = get_user_information(path_user[0])        
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+
+	print(user_info_query) 
+	t1 = time.time() 
+	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))  
+	t2 = time.time() 
+	print(t2 - t1) 
+
 if __name__ == '__main__':  
+	if os.path.exists("datas"): 
+		try:
+			shutil.rmtree("datas") 
+			print('Deleted!')
+		except: 
+			print('No need to delete')
+	# test_example_5() 
+	test_pressure() 
+	# rec_store = STORE_RECOMMENDATION_SYSTEM(
+	# 	storage_path = 'datas/storage/user', 
+	# 	device = 'cuda:0', 
+	# 	embdding_storage_path = 'datas/storage/embeddings', 
+	# 	classifier_name = 'decision_tree'
+	# )
+	# app.run(host='0.0.0.0',port=5000)
 	# test_example_1() 
-	test_example_2() 
+	# test_example_2() 
 	# test_example_3() 
+	# test_example_4() 
+	# test_example_5()
+	# test_performance() 
  
 	# # 初期：会只根据几个关键词来对用户进行建模 
 	# rec_store.update_user_preference_tag(

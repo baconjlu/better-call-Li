@@ -1,0 +1,797 @@
+{
+    "InterfaceId": 13,
+    "CurrentUser": "12345",
+    "Stores": [
+        {
+            "storeId": 12584,
+            "storeName": "Fresh Mart",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.006,
+                "address": "123 Main Street, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Apples",
+                    "category": "Fruits",
+                    "price": 1.99,
+                    "quantity": 100
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Bread",
+                    "category": "Bakery",
+                    "price": 2.49,
+                    "quantity": 50
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Milk",
+                    "category": "Dairy",
+                    "price": 3.29,
+                    "quantity": 30
+                }
+            ],
+            "storeDescription": "Fresh Mart offers a wide selection of fresh produce, bakery items, and dairy products."
+        },
+        {
+            "storeId": 25455,
+            "storeName": "Tech Haven",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Main Street, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Laptop",
+                    "brand": "Apple",
+                    "price": 1500,
+                    "description": "The latest MacBook Pro with M1 chip.",
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Smartphone",
+                    "brand": "Samsung",
+                    "price": 1000,
+                    "description": "Samsung Galaxy S21 Ultra with 5G capabilities.",
+                    "quantityAvailable": 15
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Headphones",
+                    "brand": "Sony",
+                    "price": 300,
+                    "description": "Sony WH-1000XM4 Wireless Noise-Canceling Headphones.",
+                    "quantityAvailable": 20
+                }
+            ],
+            "storeDescription": "Tech Haven is your one-stop shop for the latest and greatest in technology. From laptops to smartphones and accessories, we've got you covered with top brands and competitive prices."
+        },
+        {
+            "storeId": 79553,
+            "storeName": "Antique Treasures",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.006,
+                "address": "123 Main Street, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Qing Dynasty Vase",
+                    "description": "A beautifully crafted porcelain vase from the Qing Dynasty period, featuring intricate designs and vibrant colors.",
+                    "price": 5000
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Victorian Era Pocket Watch",
+                    "description": "An exquisite pocket watch from the Victorian era, adorned with ornate engravings and still in working condition.",
+                    "price": 1500
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Ancient Greek Amphora",
+                    "description": "An authentic amphora from ancient Greece, showcasing the artistic prowess of the Hellenistic period.",
+                    "price": 8000
+                }
+            ],
+            "storeDescription": "Antique Treasures specializes in rare and valuable artifacts from various historical periods, offering discerning collectors the opportunity to acquire unique pieces of history."
+        },
+        {
+            "storeId": 34506,
+            "storeName": "FoodieMart",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Main Street, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Organic Apples",
+                    "category": "Fruits",
+                    "price": 2.99,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Grass-fed Beef",
+                    "category": "Meat",
+                    "price": 9.99,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Freshly Baked Baguette",
+                    "category": "Bread",
+                    "price": 3.49,
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "FoodieMart is your one-stop shop for fresh, high-quality groceries. We specialize in organic produce, grass-fed meats, and artisanal breads."
+        },
+        {
+            "storeId": 65271,
+            "storeName": "Pet Paradise",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "123 Pet Avenue, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Dog Food",
+                    "category": "Pet Supplies",
+                    "price": 25.99,
+                    "quantityAvailable": 100
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Cat Litter",
+                    "category": "Pet Supplies",
+                    "price": 15.49,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Bird Cage",
+                    "category": "Pet Supplies",
+                    "price": 99.99,
+                    "quantityAvailable": 20
+                }
+            ],
+            "storeDescription": "Pet Paradise offers everything your furry, feathered, or scaly friends need for a happy and healthy life. From premium pet food to comfortable bedding, we've got it all!"
+        },
+        {
+            "storeId": 82346,
+            "storeName": "Fitness Emporium",
+            "location": {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "address": "123 Fitness Avenue, Chicago, IL"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Treadmill",
+                    "category": "Fitness Equipment",
+                    "price": 999.99,
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Dumbbell Set",
+                    "category": "Fitness Equipment",
+                    "price": 299.99,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Yoga Mat",
+                    "category": "Fitness Accessories",
+                    "price": 29.99,
+                    "quantityAvailable": 50
+                }
+            ],
+            "storeDescription": "Fitness Emporium is your destination for top-quality fitness equipment and accessories. Whether you're a gym enthusiast or a casual exerciser, we have everything you need to stay in shape."
+        },
+        {
+            "storeId": 93482,
+            "storeName": "Bookworm's Haven",
+            "location": {
+                "latitude": 42.3601,
+                "longitude": -71.0589,
+                "address": "123 Book Street, Boston, MA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Fiction Novels",
+                    "category": "Books",
+                    "price": 12.99,
+                    "quantityAvailable": 200
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Biographies",
+                    "category": "Books",
+                    "price": 15.99,
+                    "quantityAvailable": 100
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Cookbooks",
+                    "category": "Books",
+                    "price": 20.99,
+                    "quantityAvailable": 50
+                }
+            ],
+            "storeDescription": "Bookworm's Haven is a paradise for book lovers. Lose yourself in our vast collection of fiction, non-fiction, and specialty books, carefully curated to satisfy every literary taste."
+        },
+        {
+            "storeId": 57832,
+            "storeName": "Artisanal Crafts",
+            "location": {
+                "latitude": 33.749,
+                "longitude": -84.388,
+                "address": "123 Craft Lane, Atlanta, GA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Handmade Pottery",
+                    "category": "Crafts",
+                    "price": 49.99,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Artisanal Jewelry",
+                    "category": "Crafts",
+                    "price": 79.99,
+                    "quantityAvailable": 30
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Woodwork Creations",
+                    "category": "Crafts",
+                    "price": 99.99,
+                    "quantityAvailable": 20
+                }
+            ],
+            "storeDescription": "Artisanal Crafts showcases the talent and creativity of local artisans. From handcrafted pottery to unique jewelry pieces, each item is made with love and attention to detail."
+        },
+        {
+            "storeId": 39845,
+            "storeName": "Gamer's Paradise",
+            "location": {
+                "latitude": 47.6062,
+                "longitude": -122.3321,
+                "address": "123 Gamer Street, Seattle, WA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Gaming Console",
+                    "category": "Electronics",
+                    "price": 399.99,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Gaming Chair",
+                    "category": "Furniture",
+                    "price": 199.99,
+                    "quantityAvailable": 30
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Gaming Headset",
+                    "category": "Accessories",
+                    "price": 79.99,
+                    "quantityAvailable": 50
+                }
+            ],
+            "storeDescription": "Gamer's Paradise is a haven for gaming enthusiasts. Whether you're into console gaming or PC gaming, we have everything you need to take your gaming experience to the next level."
+        },
+        {
+            "storeId": 74621,
+            "storeName": "Green Thumb Garden Center",
+            "location": {
+                "latitude": 39.7392,
+                "longitude": -104.9903,
+                "address": "123 Garden Avenue, Denver, CO"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Flowering Plants",
+                    "category": "Plants",
+                    "price": 19.99,
+                    "quantityAvailable": 100
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Vegetable Seeds",
+                    "category": "Seeds",
+                    "price": 5.99,
+                    "quantityAvailable": 200
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Gardening Tools",
+                    "category": "Tools",
+                    "price": 29.99,
+                    "quantityAvailable": 50
+                }
+            ],
+            "storeDescription": "Green Thumb Garden Center is your go-to destination for all things gardening. Whether you're a seasoned gardener or just starting out, we have everything you need to cultivate a beautiful and thriving garden."
+        },
+        {
+            "storeId": 67890,
+            "storeName": "Fashionista Boutique",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "456 Fashion Ave, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Designer Dress",
+                    "brand": "Chanel",
+                    "price": 2000,
+                    "description": "A stunning couture dress from Chanel's latest collection.",
+                    "quantityAvailable": 5
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Luxury Handbag",
+                    "brand": "Louis Vuitton",
+                    "price": 3000,
+                    "description": "Iconic Louis Vuitton handbag crafted from premium leather.",
+                    "quantityAvailable": 8
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Italian Leather Shoes",
+                    "brand": "Gucci",
+                    "price": 1000,
+                    "description": "Handmade Italian leather shoes with exquisite craftsmanship.",
+                    "quantityAvailable": 10
+                }
+            ],
+            "storeDescription": "Fashionista Boutique offers a curated selection of luxury fashion items, from designer dresses to premium accessories, for the fashion-forward individual."
+        },
+        {
+            "storeId": 54321,
+            "storeName": "Pet Paradise",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.006,
+                "address": "789 Pet Street, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Organic Dog Food",
+                    "category": "Pet Supplies",
+                    "price": 20,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Cat Climbing Tower",
+                    "category": "Pet Furniture",
+                    "price": 100,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Tropical Fish",
+                    "category": "Aquarium",
+                    "price": 10,
+                    "quantityAvailable": 100
+                }
+            ],
+            "storeDescription": "Pet Paradise is dedicated to providing the best for your furry and scaly friends. From premium pet food to comfortable accessories, we've got everything to keep your pets happy and healthy."
+        },
+        {
+            "storeId": 98765,
+            "storeName": "Bookworm Haven",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "567 Bookworm Blvd, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Bestseller Fiction",
+                    "category": "Books",
+                    "price": 25,
+                    "quantityAvailable": 30
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Classic Literature",
+                    "category": "Books",
+                    "price": 20,
+                    "quantityAvailable": 40
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Self-Help Guide",
+                    "category": "Books",
+                    "price": 15,
+                    "quantityAvailable": 20
+                }
+            ],
+            "storeDescription": "Bookworm Haven is a paradise for literature enthusiasts. Discover a wide range of books, from bestsellers to timeless classics, and embark on literary adventures."
+        },
+        {
+            "storeId": 11223,
+            "storeName": "Artisanal Crafts Emporium",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "890 Crafty Ave, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Handcrafted Pottery",
+                    "category": "Crafts",
+                    "price": 50,
+                    "quantityAvailable": 15
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Artisanal Candles",
+                    "category": "Crafts",
+                    "price": 30,
+                    "quantityAvailable": 25
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Custom Woodwork",
+                    "category": "Crafts",
+                    "price": 100,
+                    "quantityAvailable": 10
+                }
+            ],
+            "storeDescription": "Artisanal Crafts Emporium celebrates the beauty of handmade crafts. Explore unique pottery, candles, and woodwork crafted with passion and skill."
+        },
+        {
+            "storeId": 33445,
+            "storeName": "Fitness Essentials",
+            "location": {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "address": "123 Gym Street, Chicago, IL"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Adjustable Dumbbells",
+                    "category": "Fitness Equipment",
+                    "price": 200,
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Yoga Mats",
+                    "category": "Fitness Accessories",
+                    "price": 50,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Protein Powder",
+                    "category": "Nutrition",
+                    "price": 30,
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "Fitness Essentials is your go-to destination for everything you need to stay fit and healthy. From top-quality workout equipment to nutritional supplements, we've got you covered."
+        },
+        {
+            "storeId": 55667,
+            "storeName": "Gamer's Haven",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "789 Gamer's Lane, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Gaming PC",
+                    "category": "Gaming Hardware",
+                    "price": 1500,
+                    "quantityAvailable": 5
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Console",
+                    "category": "Gaming Hardware",
+                    "price": 500,
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Popular Video Games",
+                    "category": "Games",
+                    "price": 60,
+                    "quantityAvailable": 50
+                }
+            ],
+            "storeDescription": "Gamer's Haven is paradise for gaming enthusiasts. Discover the latest gaming hardware, consoles, and a vast library of video games to satisfy your gaming cravings."
+        },
+        {
+            "storeId": 77889,
+            "storeName": "Nature's Harvest",
+            "location": {
+                "latitude": 47.6062,
+                "longitude": -122.3321,
+                "address": "456 Greenery Ave, Seattle, WA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Organic Produce",
+                    "category": "Fruits & Vegetables",
+                    "price": 3.99,
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Wild-caught Salmon",
+                    "category": "Seafood",
+                    "price": 15.99,
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Natural Honey",
+                    "category": "Pantry Essentials",
+                    "price": 10,
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "Nature's Harvest celebrates the bounty of nature with fresh, organic produce, sustainably sourced seafood, and wholesome pantry essentials."
+        },
+        {
+            "storeId": 67890,
+            "storeName": "Gadget Galaxy",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "456 Tech Avenue, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Virtual Reality Headset",
+                    "brand": "Oculus",
+                    "price": 399,
+                    "description": "Experience immersive virtual worlds with the latest Oculus VR headset.",
+                    "quantityAvailable": 25
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Drone",
+                    "brand": "DJI",
+                    "price": 999,
+                    "description": "Capture stunning aerial footage with the DJI Mavic Air 2 drone.",
+                    "quantityAvailable": 15
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Wireless Charging Pad",
+                    "brand": "Belkin",
+                    "price": 49.99,
+                    "description": "Charge your devices wirelessly with the Belkin Boost Up wireless charging pad.",
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "Gadget Galaxy is a haven for tech enthusiasts, offering the latest gadgets and accessories to enhance your digital lifestyle."
+        },
+        {
+            "storeId": 12345,
+            "storeName": "Fashionista Boutique",
+            "location": {
+                "latitude": 41.8781,
+                "longitude": -87.6298,
+                "address": "789 Fashion Street, Chicago, IL"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Designer Dress",
+                    "brand": "Gucci",
+                    "price": 1500,
+                    "description": "Make a statement with this luxurious Gucci designer dress.",
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Leather Handbag",
+                    "brand": "Louis Vuitton",
+                    "price": 2000,
+                    "description": "Elevate your style with this elegant Louis Vuitton leather handbag.",
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Fashion Watch",
+                    "brand": "Rolex",
+                    "price": 5000,
+                    "description": "Accessorize in style with this sophisticated Rolex fashion watch.",
+                    "quantityAvailable": 15
+                }
+            ],
+            "storeDescription": "Fashionista Boutique offers a curated collection of high-end fashion apparel and accessories for discerning shoppers."
+        },
+        {
+            "storeId": 45678,
+            "storeName": "Bookworm Haven",
+            "location": {
+                "latitude": 40.7128,
+                "longitude": -74.006,
+                "address": "321 Bookworm Lane, New York, NY"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Fiction Bestseller",
+                    "author": "Stephen King",
+                    "price": 25.99,
+                    "description": "Get lost in the thrilling world of Stephen King's latest fiction bestseller.",
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Cookbook",
+                    "author": "Jamie Oliver",
+                    "price": 29.99,
+                    "description": "Discover mouthwatering recipes in Jamie Oliver's latest cookbook.",
+                    "quantityAvailable": 30
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Self-Help Guide",
+                    "author": "Brené Brown",
+                    "price": 19.99,
+                    "description": "Find inspiration and courage in Brené Brown's empowering self-help guide.",
+                    "quantityAvailable": 40
+                }
+            ],
+            "storeDescription": "Bookworm Haven is a paradise for book lovers, offering a diverse selection of fiction, non-fiction, and specialty books for every reader."
+        },
+        {
+            "storeId": 98765,
+            "storeName": "Pet Paradise",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "123 Pet Street, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Cat Condo",
+                    "type": "Furniture",
+                    "price": 99.99,
+                    "description": "Give your feline friend a cozy retreat with this luxurious cat condo.",
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Dog Collar",
+                    "type": "Accessories",
+                    "price": 29.99,
+                    "description": "Accessorize your pup with this stylish and durable dog collar.",
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Bird Cage",
+                    "type": "Cage",
+                    "price": 79.99,
+                    "description": "Provide a comfortable habitat for your feathered friend with this spacious bird cage.",
+                    "quantityAvailable": 15
+                }
+            ],
+            "storeDescription": "Pet Paradise offers a wide range of products to pamper your pets, from cozy beds to interactive toys, ensuring they live their best lives."
+        },
+        {
+            "storeId": 13579,
+            "storeName": "Fitness Fanatics",
+            "location": {
+                "latitude": 34.0522,
+                "longitude": -118.2437,
+                "address": "456 Gym Avenue, Los Angeles, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Treadmill",
+                    "type": "Cardio",
+                    "price": 999.99,
+                    "description": "Stay in shape with this high-quality treadmill for your home gym.",
+                    "quantityAvailable": 10
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Dumbbell Set",
+                    "type": "Strength",
+                    "price": 299.99,
+                    "description": "Build muscle and strength with this versatile dumbbell set.",
+                    "quantityAvailable": 20
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Yoga Mat",
+                    "type": "Yoga",
+                    "price": 49.99,
+                    "description": "Enhance your yoga practice with this comfortable and durable yoga mat.",
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "Fitness Fanatics is your ultimate destination for fitness equipment and accessories, helping you achieve your health and wellness goals."
+        },
+        {
+            "storeId": 24680,
+            "storeName": "Artisanal Delights",
+            "location": {
+                "latitude": 37.7749,
+                "longitude": -122.4194,
+                "address": "123 Art Street, San Francisco, CA"
+            },
+            "items": [
+                {
+                    "itemId": 1,
+                    "itemName": "Handcrafted Ceramics",
+                    "type": "Home Decor",
+                    "price": 49.99,
+                    "description": "Add a touch of elegance to your home with these handcrafted ceramic pieces.",
+                    "quantityAvailable": 50
+                },
+                {
+                    "itemId": 2,
+                    "itemName": "Artisanal Chocolate",
+                    "type": "Food",
+                    "price": 19.99,
+                    "description": "Indulge your sweet tooth with these decadent artisanal chocolates.",
+                    "quantityAvailable": 100
+                },
+                {
+                    "itemId": 3,
+                    "itemName": "Handwoven Basket",
+                    "type": "Crafts",
+                    "price": 39.99,
+                    "description": "Organize your space in style with these beautifully handwoven baskets.",
+                    "quantityAvailable": 30
+                }
+            ],
+            "storeDescription": "Artisanal Delights celebrates the craftsmanship of artisans around the world, offering unique and handmade treasures for your home and palate."
+        }
+    ],
+    "Location": {
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "country": "United States",
+        "state": "New York",
+        "city": "New York City",
+        "street": "Broadway",
+        "number": "123",
+        "floor": "5th",
+        "zipcode": "10001"
+    }
+}

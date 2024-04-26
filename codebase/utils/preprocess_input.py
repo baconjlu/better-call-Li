@@ -1,6 +1,19 @@
 import numpy as np 
 import json 
 import pickle 
+from collections import defaultdict 
+
+def get_feedback_to_item(path): 
+    with open(path, 'r') as f: 
+        data = json.load(f)
+    return_list = defaultdict(list) 
+    for _info in data: 
+        # print(_info) 
+        item_name = str(_info['Feedback']['Item']['ItemName']).lower() 
+        if 'itemCategory' in _info: 
+            item_name = str(_info['itemCategory']).lower() 
+        return_list[str(_info['Feedback']['UserId'])].append((item_name, _info['Feedback']['rating'])) 
+    return return_list 
 
 def get_feedback_to_store(path): 
     with open(path, 'r') as f: 
@@ -33,7 +46,10 @@ def get_store_information(path):
         store_item = _store['items'] 
         item_list = [] 
         for _item in store_item: 
-            item_list.append(str(_item['category']).lower()) 
+            if 'category' in _item:
+                item_list.append(str(_item['category']).lower()) 
+            else: 
+                item_list.append(str(_item['itemName']).lower()) 
         store_list.append({"store_name": store_name, "store_item": list(set(item_list))})   
     return store_list
 
