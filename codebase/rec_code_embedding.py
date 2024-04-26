@@ -19,7 +19,8 @@ from utils.preprocess_input import get_feedback_to_item
 # 
 MLTHRESHOLD = 30
 LIKE_LIMIT = 7 
-from utils.LLAMA import LLAMA
+from flask import Flask, jsonify, request
+# from utils.LLAMA import LLAMA
 
 class USER_RECOMMENDATION_SYSTEM:
 	def __init__(self, 
@@ -601,6 +602,8 @@ def test_example_5():
 	path_user = [
 		'utils/test_files/Functional-Test/5/UwIn.json'
 	]
+	with open(path_stores[0], 'r') as f: 
+		origin_store_data = json.load(f) 
 	store_query_list = get_store_information(path_stores[0])      
 	for _ in store_query_list: 
 		rec_store.update_store_info(_)
@@ -611,7 +614,11 @@ def test_example_5():
 	print(user_info_query) 
 
 	t1 = time.time() 
-	print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))  
+
+	result = rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list])
+	print(result)  
+
+	rank_list = [] 
 
 
 def test_pressure(): 
@@ -668,6 +675,96 @@ def test_pressure():
 	t2 = time.time() 
 	print(t2 - t1) 
 
+
+def get_store_information_from_json(original_data): 
+    store_list = [] 
+    store_data = original_data['Stores'] 
+    for _store in store_data: 
+        store_name = str(_store['storeId']) 
+        store_item = _store['items'] 
+        item_list = [] 
+        for _item in store_item: 
+            if 'category' in _item:
+                item_list.append(str(_item['category']).lower()) 
+            else: 
+                item_list.append(str(_item['itemName']).lower()) 
+        store_list.append({"store_name": store_name, "store_item": list(set(item_list))})   
+    return store_list
+
+
+def get_user_information_from_json(origin_data): 
+    user_interest = origin_data["UserData"]["Interests"] 
+    user_interest = [str(_).lower() for _ in user_interest] 
+    return {"user_id": str(origin_data["UserData"]["UserId"]), "user_preference": user_interest}   
+
+def recommend(stores, user_info, rec_store): 
+	store_query_list = get_store_information_from_json(stores) 
+	for _ in store_query_list: 
+		rec_store.update_store_info(_)
+	user_info_query  = get_user_information(user_info)           
+	if 'user_preference' in user_info_query: 
+		rec_store.update_user_preference_tag(user_info_query, user_info_query['user_preference']) 
+	print(user_info_query) 
+	t1 = time.time() 
+	rec_list = rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list])
+	# print(rec_store.recommend_store(user_info_query, [_["store_name"] for _ in store_query_list]))  
+	t2 = time.time() 
+	print(f'Total time is {np.round(t2 - t1, 2)}s')    
+	
+	
+
+
+def get_feedback_to_store_from_json(data): 
+    data = data["Feedback"]
+    rating = data["rating"] 
+    user_id = data["UserId"] 
+    store_info = data["Item"]
+    item_infos = store_info["items"] 
+    item_list = [] 
+    for _ in item_infos: 
+        item_list.append(str(_["itemCategory"]).lower())
+    store_dict = {
+        "store_name" : str(store_info["storeId"]), 
+        "store_item" : list(set(item_list))
+    }
+    user_info  = {
+        "user_id" : str(user_id)
+    } 
+    return store_dict, user_info, rating   
+
+def update(f2s, rec_store): 
+	data = get_feedback_to_store_from_json(f2s) 
+	store_info  = data[0] 
+	user_info   = data[1] 
+	rating_info = data[2] 
+	rec_store.update_store_info(
+		store_info
+	)
+	rec_store.update_user_store_preference(
+		user_info, store_info['store_name'], rating_info
+	)
+
+app = Flask(__name__)
+@app.route('/require_recommendation',methods=['POST','GET'])
+def generate_recommendation():
+	rec_store = STORE_RECOMMENDATION_SYSTEM(
+		storage_path = 'datas/storage/user', 
+		device = 'cuda:0', 
+		embdding_storage_path = 'datas/storage/embeddings', 
+		classifier_name = 'decision_tree'
+	)
+
+	if request.is_json:
+		data = request.json
+		pdata = json.loads(data)
+		user = pdata.get("user")
+		stores = pdata.get("store")
+		rec_result = recommend(stores, user, rec_store)  
+		return rec_result 
+
+	else:
+		return 'no'
+
 if __name__ == '__main__':  
 	if os.path.exists("datas"): 
 		try:
@@ -675,14 +772,18 @@ if __name__ == '__main__':
 			print('Deleted!')
 		except: 
 			print('No need to delete')
-	# test_example_5() 
-	test_pressure() 
+	app.run(host='0.0.0.0',port=6006) 
 	# rec_store = STORE_RECOMMENDATION_SYSTEM(
 	# 	storage_path = 'datas/storage/user', 
 	# 	device = 'cuda:0', 
 	# 	embdding_storage_path = 'datas/storage/embeddings', 
 	# 	classifier_name = 'decision_tree'
 	# )
+
+
+
+	# test_example_5() 
+	# test_pressure() 
 	# app.run(host='0.0.0.0',port=5000)
 	# test_example_1() 
 	# test_example_2() 
@@ -761,3 +862,4 @@ if __name__ == '__main__':
 	# [['store-4', 6.0], ['store-5', 4.0]] 	
 	# python rec_code_embedding.py 
 	# python rec_code_embedding.py 
+
